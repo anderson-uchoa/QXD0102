@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">kisan</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
+
+
+    <string name="title_activity_lista_livros">ListaLivrosActivity</string>
+    <string name="title_activity_add_livro">AddLivroActivity</string>
+    <string name="title_activity_visualizar_livro">VisualizarLivro</string>
+    <string name="title_activity_visualizar_perfil">Meu Perfil</string>
+    <string name="title_activity_visualizar_meus_anuncios">Meus Anuncios </string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="search_title">Busca</string>
+    <string name="title_activity_visualziar_meus_anuncios">VisualziarMeusAnunciosActivity</string>
+</resources>
