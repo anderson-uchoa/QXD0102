@@ -12,4 +12,82 @@
     tools:context=".activity.VisualizarAnuncioActivity"
     tools:showIn="@layout/activity_visualizar_anuncios">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/images"
+            android:layout_weight="0.10" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="105dp"
+            android:text="@string/tv_descricao_livro"
+            android:id="@+id/textView" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="107dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/tv_distancia_livro"
+            android:id="@+id/textView2"
+            android:layout_weight="0.10" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="86dp"
+                android:id="@+id/imageView2"
+                android:src="@android:drawable/sym_def_app_icon"
+                android:layout_weight="0.37" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="86dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/tv_descricao_usuario"
+                android:id="@+id/textView3"
+                android:layout_weight="0.17" />
+        </TableRow>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/comunicar_chat"
+            android:id="@+id/btn_chat"
+            android:layout_weight="0.10" />
+
+    </LinearLayout>
 </RelativeLayout>

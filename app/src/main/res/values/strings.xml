@@ -20,4 +20,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="search_title">Busca</string>
     <string name="title_activity_visualziar_meus_anuncios">VisualziarMeusAnunciosActivity</string>
+    <string name="tv_descricao_livro">Descrição</string>
+    <string name="tv_distancia_livro">Localizacão</string>
+    <string name="tv_descricao_usuario">Descriçao usuario</string>
+    <string name="comunicar_chat">CHAT</string>
 </resources>
