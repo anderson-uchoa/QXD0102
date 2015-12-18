@@ -22,8 +22,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
+
+            <!-- to identify this activity as "searchable" -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
@@ -80,7 +90,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
         </activity>
-
     </application>
 
 </manifest>

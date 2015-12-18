@@ -24,4 +24,8 @@
     <string name="tv_distancia_livro">Localizacão</string>
     <string name="tv_descricao_usuario">Descriçao usuario</string>
     <string name="comunicar_chat">CHAT</string>
+    <string name="menu_search">Buscar</string>
+    <string name="search_hint">Buscar</string>
+    <string name="compartilhar_text">Compartilhar</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
