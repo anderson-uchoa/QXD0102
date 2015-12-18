@@ -24,7 +24,6 @@ public class VisualizarAnuncioActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         btnChat = (ImageButton) findViewById(R.id.btn_chat);
 
         btnChat.setOnClickListener(new View.OnClickListener() {
