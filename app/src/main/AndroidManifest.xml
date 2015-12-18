@@ -93,10 +93,11 @@
         <activity
             android:name=".activity.Visualizar_Localizacao_Activity"
             android:label="@string/title_activity_visualizar__localizacao_"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity" />
+            android:value="quixada.ufc.br.kisan.activity.MainActivity" />
+        </activity>
 
     </application>
 
