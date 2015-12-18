@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.adapter.ConversasAdapter;
 import quixada.ufc.br.kisan.adapter.MeusAnunciosAdapter;
 
 public class ConversasActivity extends AppCompatActivity {
@@ -58,8 +59,8 @@ public class ConversasActivity extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String Slecteditem = conversas[+position];
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+                startActivity(intent);
             }
         });
 
