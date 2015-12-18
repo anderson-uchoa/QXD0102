@@ -14,7 +14,7 @@ public class AddAnuncioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_anuncio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
