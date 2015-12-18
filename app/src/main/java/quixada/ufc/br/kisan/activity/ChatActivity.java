@@ -1,9 +1,9 @@
 package quixada.ufc.br.kisan.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
@@ -16,7 +16,7 @@ import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.ChatArrayAdapter;
 import quixada.ufc.br.kisan.model.ChatMessage;
 
-public class ChatActivity extends Activity {
+public class ChatActivity extends AppCompatActivity{
     private static final String TAG = "ChatActivity";
 
     private ChatArrayAdapter chatArrayAdapter;
@@ -32,6 +32,7 @@ public class ChatActivity extends Activity {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         setContentView(R.layout.activity_chat);
+
 
         buttonSend = (Button) findViewById(R.id.buttonSend);
 
@@ -69,11 +70,13 @@ public class ChatActivity extends Activity {
         });
     }
 
+
     private boolean sendChatMessage(){
         chatArrayAdapter.add(new ChatMessage(side, chatText.getText().toString()));
         chatText.setText("");
         side = !side;
         return true;
     }
+
 
 }
