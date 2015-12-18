@@ -9,7 +9,7 @@
     <string name="title_activity_visualizar_livro">VisualizarLivro</string>
     <string name="title_activity_visualizar_perfil">Meu Perfil</string>
     <string name="title_activity_visualizar_meus_anuncios">Meus Anuncios </string>
-    <string name="title_activity_chat">ChatActivity</string>
+    <string name="title_activity_chat">Chat</string>
     <string name="title_activity_signup">SignupActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
