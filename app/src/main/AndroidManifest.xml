@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="quixada.ufc.br.kisan" >
+    package="quixada.ufc.br.kisan">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -12,13 +12,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-           <!-- <intent-filter>
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -37,20 +38,22 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!--<meta-data
+            <!--
+                <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        -->
+            -->
         </activity>
         <activity
             android:name=".activity.AddAnuncioActivity"
             android:label="@string/title_activity_add_livro"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity" />
@@ -58,7 +61,7 @@
         <activity
             android:name=".activity.VisualizarAnuncioActivity"
             android:label="@string/title_activity_visualizar_livro"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
@@ -66,7 +69,7 @@
         <activity
             android:name=".activity.VisualizarPerfilActivity"
             android:label="@string/title_activity_visualizar_perfil"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
@@ -74,7 +77,7 @@
         <activity
             android:name=".activity.VisualizarMeusAnunciosActivity"
             android:label="@string/title_activity_visualizar_meus_anuncios"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
@@ -82,7 +85,7 @@
         <activity
             android:name=".activity.ChatActivity"
             android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
@@ -90,7 +93,7 @@
         <activity
             android:name=".activity.SignupActivity"
             android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
@@ -98,20 +101,26 @@
         <activity
             android:name=".activity.Visualizar_Localizacao_Activity"
             android:label="@string/title_activity_visualizar__localizacao_"
-            android:theme="@style/AppTheme.NoActionBar" >
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        </activity>
-        <activity
-            android:name=".activity.ConversasActivity"
-            android:label="@string/title_activity_conversas"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".activity.ConversasActivity"
+            android:label="@string/title_activity_conversas"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="quixada.ufc.br.kisan.activity.MainActivity" />
+        </activity>
+        <activity android:name=".activity.EditAnuncioActivity"
+            android:label="@string/title_activity_editar"
+            android:theme="@style/AppTheme.NoActionBar">>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity" />
+        </activity>
     </application>
 
 </manifest>

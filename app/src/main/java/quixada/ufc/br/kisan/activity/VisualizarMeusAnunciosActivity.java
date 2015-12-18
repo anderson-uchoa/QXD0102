@@ -79,19 +79,23 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity  implement
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
             case R.id.item_deletar:
                 Toast.makeText(this, "Deletar", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item_Editar:
                 Toast.makeText(this, "Editar", Toast.LENGTH_SHORT).show();
+                intent = new Intent(getBaseContext(), EditAnuncioActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.item_Visualizar:
                 Toast.makeText(this, "Visualizar", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getBaseContext(), VisualizarAnuncioActivity.class);
+                intent = new Intent(getBaseContext(), VisualizarAnuncioActivity.class);
                 startActivity(intent);
 
                 return true;
+
         }
 
     return  true;
