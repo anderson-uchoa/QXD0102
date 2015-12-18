@@ -11,17 +11,18 @@ import android.widget.TextView;
 import quixada.ufc.br.kisan.R;
 
 /**
- * Created by allef on 17/12/15.
+ * Created by andersonuchoa on 18/12/15.
  */
-public class MeusAnunciosAdapter extends ArrayAdapter<String> {
+public class ConversasAdapter extends ArrayAdapter<String> {
+
 
 
     private final Activity context;
     private final String[] itemname;
     private final Integer[] integers;
 
-    public MeusAnunciosAdapter(Activity context, String[] itemname, Integer[] integers) {
-        super(context, R.layout.fila_lista, itemname);
+    public ConversasAdapter(Activity context, String[] itemname, Integer[] integers) {
+        super(context, R.layout.fila_lista_conversas, itemname);
         // TODO Auto-generated constructor stub
 
         this.context=context;
@@ -32,19 +33,16 @@ public class MeusAnunciosAdapter extends ArrayAdapter<String> {
     public View getView(int position,View view, ViewGroup parent){
 
         LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.fila_lista,null,true);
+        View rowView=inflater.inflate(R.layout.fila_lista_conversas,null,true);
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.texto_principal);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView etxDescripcion = (TextView) rowView.findViewById(R.id.texto_secundario);
 
         txtTitle.setText(itemname[position]);
         imageView.setImageResource(integers[position]);
-        etxDescripcion.setText("Emprestado");
+
 
         return rowView;
     }
 
-
 }
-
