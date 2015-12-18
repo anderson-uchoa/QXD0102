@@ -11,17 +11,18 @@ import android.widget.TextView;
 import quixada.ufc.br.kisan.R;
 
 /**
- * Created by allef on 17/12/15.
+ * Created by andersonuchoa on 18/12/15.
  */
-public class MeusAnunciosAdapter extends ArrayAdapter<String> {
+public class WishListAdapter extends ArrayAdapter<String> {
+
 
 
     private final Activity context;
     private final String[] itemname;
     private final Integer[] integers;
 
-    public MeusAnunciosAdapter(Activity context, String[] itemname, Integer[] integers) {
-        super(context, R.layout.fila_lista_wish_list, itemname);
+    public WishListAdapter(Activity context, String[] itemname, Integer[] integers) {
+        super(context, R.layout.fila_lista, itemname);
         // TODO Auto-generated constructor stub
 
         this.context=context;
@@ -36,15 +37,12 @@ public class MeusAnunciosAdapter extends ArrayAdapter<String> {
 
         TextView txtTitle = (TextView) rowView.findViewById(R.id.texto_principal);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        TextView etxDescripcion = (TextView) rowView.findViewById(R.id.texto_secundario);
 
         txtTitle.setText(itemname[position]);
         imageView.setImageResource(integers[position]);
-        etxDescripcion.setText("Emprestado");
+
 
         return rowView;
     }
 
-
 }
-

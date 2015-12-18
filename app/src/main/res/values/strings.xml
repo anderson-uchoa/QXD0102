@@ -4,13 +4,13 @@
     <string name="title_activity_login">Sign in</string>
 
 
-    <string name="title_activity_lista_livros">ListaLivrosActivity</string>
+    <string name="title_activity_lista_livros">Lista Livros</string>
     <string name="title_activity_add_livro">Adicionar Livro</string>
-    <string name="title_activity_visualizar_livro">VisualizarLivro</string>
+    <string name="title_activity_visualizar_livro">Visualizar Livro</string>
     <string name="title_activity_visualizar_perfil">Meu Perfil</string>
     <string name="title_activity_visualizar_meus_anuncios">Meus Anuncios </string>
-    <string name="title_activity_chat">ChatActivity</string>
-    <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_chat">Chat</string>
+    <string name="title_activity_signup">Signup</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -19,7 +19,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="search_title">Busca</string>
-    <string name="title_activity_visualziar_meus_anuncios">VisualziarMeusAnunciosActivity</string>
+    <string name="title_activity_visualziar_meus_anuncios">Visualziar Meus Anuncios</string>
     <string name="tv_descricao_livro">Descrição</string>
     <string name="tv_distancia_livro">Localizacão</string>
     <string name="tv_descricao_usuario">Descriçao usuario</string>
@@ -27,5 +27,7 @@
     <string name="menu_search">Buscar</string>
     <string name="search_hint">Buscar</string>
     <string name="compartilhar_text">Compartilhar</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps">Mapss</string>
+    <string name="title_activity_visualizar__localizacao_">Visualizar Localizacao</string>
+    <string name="title_activity_visualizar_wishlist">VisualizarWishlistActivity</string>
 </resources>
