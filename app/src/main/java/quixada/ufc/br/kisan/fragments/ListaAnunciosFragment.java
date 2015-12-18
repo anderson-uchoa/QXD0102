@@ -3,22 +3,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.activity.ChatActivity;
 import quixada.ufc.br.kisan.activity.VisualizarAnuncioActivity;
-import quixada.ufc.br.kisan.activity.VisualizarPerfilActivity;
 import quixada.ufc.br.kisan.adapter.GridViewAdapter;
 
 
-public class ListaAnunciosFragment extends Fragment {
+public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenuItemClickListener  {
 
     /**
      * Called when the activity is first created.
@@ -51,11 +50,13 @@ public class ListaAnunciosFragment extends Fragment {
         // Implement On Item click listener
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position,
+            public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
+                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
+                popupMenu.setOnMenuItemClickListener(ListaAnunciosFragment.this);
+                popupMenu.inflate(R.menu.popup_menu_lista_anuncios);
+                popupMenu.show();
 
-                Intent intent = new Intent(getContext(), VisualizarAnuncioActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -108,4 +109,22 @@ public class ListaAnunciosFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-}
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_AddWishList:
+                Toast.makeText(getActivity(), "Adicionado na WishList", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_Visualizar:
+                Toast.makeText(getActivity(), "Visualizar Livro", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), VisualizarAnuncioActivity.class);
+                startActivity(intent);
+
+                return true;
+        }
+
+        return  true;
+    }
+
+    }

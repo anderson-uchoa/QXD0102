@@ -7,17 +7,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.MeusAnunciosAdapter;
 
-public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
+public class VisualizarMeusAnunciosActivity extends AppCompatActivity  implements PopupMenu.OnMenuItemClickListener {
 
 
     private String livros[] = new String[]{"Dom Quixote", "Caso dos Dez Negrinhos",
@@ -62,8 +64,12 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String Slecteditem = livros[+position];
-                Intent intent = new Intent(getBaseContext(), VisualizarAnuncioActivity .class);
-                startActivity(intent);
+                PopupMenu popupMenu = new PopupMenu(VisualizarMeusAnunciosActivity.this, view);
+                popupMenu.setOnMenuItemClickListener( VisualizarMeusAnunciosActivity.this);
+                popupMenu.inflate(R.menu.popup_menu);
+                popupMenu.show();
+
+
             }
         });
 
@@ -71,4 +77,27 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_deletar:
+                Toast.makeText(this, "Deletar", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_Editar:
+                Toast.makeText(this, "Editar", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item_Visualizar:
+                Toast.makeText(this, "Visualizar", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), VisualizarAnuncioActivity.class);
+                startActivity(intent);
+
+                return true;
+        }
+
+    return  true;
+    }
 }
+
+
+
+
