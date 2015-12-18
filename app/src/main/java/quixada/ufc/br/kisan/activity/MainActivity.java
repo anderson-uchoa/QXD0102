@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addDrawerItems() {
 
-        String[] osArray = {"Aqui foto usuario","Meu Perfil", "Meus Anúncios", "Chat", "Logout"};
+        String[] osArray = {"Aqui foto usuario","Meu Perfil", "Meus Anúncios", "Conversas", "Logout"};
         mAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, osArray);
 
         mDrawerList.setAdapter(mAdapter);
@@ -104,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case 3:
-                        intent = new Intent(getApplicationContext(), ChatActivity.class);
+                        intent = new Intent(getApplicationContext(), ConversasActivity.class);
                         startActivity(intent);
-                        Toast.makeText(MainActivity.this, "Chat!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Conversas!", Toast.LENGTH_SHORT).show();
 
                     default:
                 }
