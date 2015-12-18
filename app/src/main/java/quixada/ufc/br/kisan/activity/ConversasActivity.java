@@ -53,9 +53,9 @@ public class ConversasActivity extends AppCompatActivity {
         });
 
 
-        MeusAnunciosAdapter adapter = new MeusAnunciosAdapter(this, conversas, imgid);
+        ConversasAdapter conversasAdapter = new ConversasAdapter(this, conversas, imgid);
         lista = (ListView) findViewById(R.id.listView);
-        lista.setAdapter(adapter);
+        lista.setAdapter(conversasAdapter);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

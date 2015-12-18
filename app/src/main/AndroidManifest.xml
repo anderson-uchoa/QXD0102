@@ -98,6 +98,14 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="quixada.ufc.br.kisan.activity.MainActivity" />
         </activity>
+        <activity
+            android:name=".activity.ConversasActivity"
+            android:label="@string/title_activity_conversas"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="quixada.ufc.br.kisan.activity.MainActivity" />
+        </activity>
 
     </application>
 
