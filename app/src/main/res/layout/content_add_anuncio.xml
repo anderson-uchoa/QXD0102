@@ -10,90 +10,89 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.AddAnuncioActivity"
-    tools:showIn="@layout/activity_add_livro">
+    tools:showIn="@layout/activity_add_anuncio">
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:id="@+id/imageButton"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_camera"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText android:id="@+id/input_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Titulo" />
+        </android.support.design.widget.TextInputLayout>
+
+        <EditText android:id="@+id/input_autor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Autor"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+        </android.support.design.widget.TextInputLayout>
+
+        <EditText android:id="@+id/input_genero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:hint="Genero"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+        </android.support.design.widget.TextInputLayout>
 
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:src="@drawable/ic_menu_camera"
-        android:layout_above="@+id/autor"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText android:id="@+id/input_descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Descrição"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nome:"
-        android:id="@+id/nome"
-        android:layout_alignParentStart="false"
-        android:layout_toRightOf="@+id/imageButton" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_Adicionar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Adicionar"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextNome"
-        android:layout_toRightOf="@id/nome"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Autor:"
-        android:id="@+id/autor"
-        android:layout_below="@+id/nome"
-        android:layout_alignStart="@+id/nome" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        </android.support.design.widget.TextInputLayout>
 
-        android:id="@+id/editTextAutor"
-        android:layout_below="@+id/editTextNome"
-        android:layout_alignStart="@+id/editTextNome"
-        android:layout_alignParentEnd="true"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Genero:"
-        android:id="@+id/genero"
-        android:layout_below="@+id/autor"
-        android:layout_alignStart="@+id/autor" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextGenero"
-        android:layout_below="@+id/editTextAutor"
-        android:layout_alignStart="@+id/editTextAutor"
-        android:layout_alignParentEnd="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="48sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Descrição:"
-        android:id="@+id/descricao"
-        android:layout_below="@+id/genero"
-        android:layout_alignStart="@+id/autor" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextDescricao"
-        android:layout_below="@+id/descricao"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editTextGenero"
-        android:layout_alignEnd="@+id/editTextGenero" />
-
+    </LinearLayout>
 
 </RelativeLayout>

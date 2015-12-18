@@ -12,8 +12,12 @@
     tools:context=".activity.VisualizarMeusAnunciosActivity"
     tools:showIn="@layout/activity_visualizar_meus_anuncios">
 
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/meusAnuncios" />
+        android:id="@+id/listView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

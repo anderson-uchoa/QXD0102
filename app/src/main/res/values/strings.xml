@@ -5,7 +5,7 @@
 
 
     <string name="title_activity_lista_livros">ListaLivrosActivity</string>
-    <string name="title_activity_add_livro">AddLivroActivity</string>
+    <string name="title_activity_add_livro">Adicionar Livro</string>
     <string name="title_activity_visualizar_livro">VisualizarLivro</string>
     <string name="title_activity_visualizar_perfil">Meu Perfil</string>
     <string name="title_activity_visualizar_meus_anuncios">Meus Anuncios </string>
