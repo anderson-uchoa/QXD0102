@@ -1,6 +1,7 @@
 package quixada.ufc.br.kisan.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,7 +26,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText email_editText;
     private EditText password_editText;
     private Button signupbutton;
-    private TextView login_textView;
 
     private Usuario usuario;
 
@@ -42,27 +42,21 @@ public class SignupActivity extends AppCompatActivity {
         email_editText = (EditText) findViewById(R.id.input_email);
         password_editText = (EditText) findViewById(R.id.input_password);
         signupbutton = (Button) findViewById(R.id.btn_signup);
-        login_textView = (TextView) findViewById(R.id.link_login);
+
 
         signupbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                singup();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
-        login_textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // finalizar o registro na tela e voltar para loginActivity
-                finish();
-            }
-        });
 
 
     }
 
-
+/*
 
     private void singup() {
         Log.d(TAG, "Signup");
@@ -144,5 +138,8 @@ public class SignupActivity extends AppCompatActivity {
 
         return valido;
     }
+
+
+*/
 
 }

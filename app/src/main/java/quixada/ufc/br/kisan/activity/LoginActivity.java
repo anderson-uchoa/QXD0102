@@ -43,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -51,11 +52,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                startActivity(intent);
             }
         });
     }
-
+/*
     private void login() {
 
         Log.d(TAG, "Efetuando login");
@@ -77,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         String passaword = password_editText.getText().toString();
 
 
-        if (email.equals("andersonguchoa@gmail.com")  &&  passaword.equals("1234")){
+        if (email.equals("teste")  &&  passaword.equals("1234")){
             Intent intent = new Intent(getApplicationContext(), VisualizarAnuncioActivity.class);
             startActivity(intent);
         }
@@ -144,5 +145,7 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setEnabled(true);
        finish();
     }
-
+*/
 }
+
+

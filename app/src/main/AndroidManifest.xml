@@ -17,12 +17,6 @@
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
@@ -38,9 +32,16 @@
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!--
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
+                -->
         </activity>
         <activity
             android:name=".activity.AddAnuncioActivity"
@@ -86,9 +87,13 @@
             android:name=".activity.SignupActivity"
             android:label="@string/title_activity_signup"
             android:theme="@style/AppTheme.NoActionBar" >
+
+            <!--
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
+                       -->
+
         </activity>
         <activity
             android:name=".activity.Visualizar_Localizacao_Activity"
