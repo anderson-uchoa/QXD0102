@@ -62,7 +62,8 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String Slecteditem = livros[+position];
-                Toast.makeText(getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), VisualizarAnuncioActivity .class);
+                startActivity(intent);
             }
         });
 

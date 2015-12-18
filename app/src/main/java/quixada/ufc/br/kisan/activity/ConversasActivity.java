@@ -39,17 +39,7 @@ public class ConversasActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent intent = new Intent(getBaseContext(), AddAnuncioActivity.class);
-                startActivity(intent);
-            }
-        });
 
 
         ConversasAdapter conversasAdapter = new ConversasAdapter(this, conversas, imgid);
