@@ -9,15 +9,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.VisualizarMeusAnunciosActivity"
-    tools:showIn="@layout/activity_visualizar_meus_anuncios">
+    tools:context="quixada.ufc.br.kisan.activity.PreProcessamentoActivity"
+    tools:showIn="@layout/activity_pre_processamento">
 
-
-    <ListView
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewMeusAnuncios"
+        android:id="@+id/progressBar"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:indeterminate="false" />
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/capa_meu_livro"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:padding="5dp" />
@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/texto_principal"
+            android:id="@+id/titulo_meu_livro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medium Text"
@@ -24,12 +24,7 @@
             android:layout_marginTop="5dp"
             android:padding="2dp"
             android:textColor="#489e37" />
-        <TextView
-            android:id="@+id/texto_secundario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:layout_marginLeft="10dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

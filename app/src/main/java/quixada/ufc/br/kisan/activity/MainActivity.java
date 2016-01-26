@@ -19,6 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.TabAdapter;
 
@@ -94,12 +96,15 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         intent = new Intent(getApplicationContext(), VisualizarMeusAnunciosActivity.class);
                         startActivity(intent);
-                        Toast.makeText(MainActivity.this, "Meus Anuncios!", Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(MainActivity.this, "Meus Anuncios!", Toast.LENGTH_SHORT).show();
 
                         break;
                     case 4:
+
+                        LoginManager.getInstance().logOut();
                         intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
+                        finish();
                         Toast.makeText(MainActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
 
                         break;

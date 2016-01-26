@@ -3,11 +3,14 @@
     package="quixada.ufc.br.kisan">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
+        android:name=".application.CustomApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -49,14 +52,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
             -->
-        </activity>
-        <activity
-            android:name=".activity.AddAnuncioActivity"
-            android:label="@string/title_activity_add_livro"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity" />
         </activity>
         <activity
             android:name=".activity.VisualizarAnuncioActivity"
@@ -114,13 +109,42 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
         </activity>
-        <activity android:name=".activity.EditAnuncioActivity"
+        <activity
+            android:name=".activity.EditAnuncioActivity"
             android:label="@string/title_activity_editar"
-            android:theme="@style/AppTheme.NoActionBar">>
+            android:theme="@style/AppTheme.NoActionBar">
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity" />
         </activity>
+
+        <provider
+            android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1682749915341471"
+            android:exported="true" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".activity.PreProcessamentoActivity"
+            android:label="@string/title_activity_pre_processamento"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+               <service android:name="quixada.ufc.br.kisan.services.AtualizarPerfilService"  android:exported="false"></service>
+
+         <activity
+            android:name=".activity.AddAnuncioActivity"
+            android:label="@string/title_activity_add_anuncio2"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

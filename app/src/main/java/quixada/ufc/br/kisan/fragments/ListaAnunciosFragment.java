@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ExpandableListView;
 import android.widget.GridView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -14,7 +15,9 @@ import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.activity.VisualizarAnuncioActivity;
+import quixada.ufc.br.kisan.adapter.ExpandableListAdapter;
 import quixada.ufc.br.kisan.adapter.GridViewAdapter;
+import quixada.ufc.br.kisan.model.Grupo;
 
 
 public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenuItemClickListener  {
@@ -23,9 +26,6 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
      * Called when the activity is first created.
      * */
 
-    private GridViewAdapter mAdapter;
-    private ArrayList<String> listLivros;
-    private ArrayList<Integer> listCapas;
 
     private GridView gridView;
 
@@ -37,30 +37,15 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_anuncios, container, false);
-        preparaList();
-        // prepared arraylist and passed it to the Adapter class
-        mAdapter = new GridViewAdapter(getActivity(),listLivros, listCapas);
-
-        // Set custom adapter to gridview
-        gridView = (GridView) view.findViewById(R.id.gridView1);
-        gridView.setAdapter(mAdapter);
 
 
 
-        // Implement On Item click listener
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position,
-                                    long id) {
-                PopupMenu popupMenu = new PopupMenu(getActivity(), view);
-                popupMenu.setOnMenuItemClickListener(ListaAnunciosFragment.this);
-                popupMenu.inflate(R.menu.popup_menu_lista_anuncios);
-                popupMenu.show();
-
-            }
-        });
+        ExpandableListView listView = (ExpandableListView) view.findViewById(R.id.livros_list);
 
 
+        ArrayList<Grupo> groups = preparaData();
+        final ExpandableListAdapter adapter = new ExpandableListAdapter(getActivity(), groups);
+        listView.setAdapter(adapter);
 
 
         return view;
@@ -70,38 +55,22 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
 
 
 
-    private void preparaList() {
+    private ArrayList<Grupo> preparaData() {
+        Grupo group1 = new Grupo("John Doe");
+        group1.filhos.add("john.doe@gmail.com");
+        group1.filhos.add("doe.john@gmail.com");
 
-        listLivros = new ArrayList<String>();
-
-        listLivros.add("Dom Quixote");
-        listLivros.add("O Conde de Monte Cristo");
-        listLivros.add(" Um Conto de Duas Cidades");
-        listLivros.add("O Pequeno Príncipe");
-        listLivros.add("O Senhor dos Anéis");
-        listLivros.add("Harry Potter e a Pedra Filosofal");
-        listLivros.add("O Caso dos Dez Negrinhos");
-        listLivros.add("O Sonho da Câmara Vermelha");
-        listLivros.add("O Leão, a Feiticeira e o Guarda-Roupa");
-        listLivros.add("Ela, a Feiticeira");
-
-
-        listCapas = new ArrayList<Integer>();
-
-        listCapas.add(R.raw.domquixote);
-        listCapas.add(R.raw.ocondedemontecristo);
-        listCapas.add(R.raw.umcontodeduascidades);
-        listCapas.add(R.raw.opequenoprincipe);
-        listCapas.add(R.raw.osenhordosaneis);
-        listCapas.add(R.raw.harryoottereapedrafilosofal);
-        listCapas.add(R.raw.casodosdeznegrinhos);
-        listCapas.add(R.raw.osonhodacamaravermelha);
-        listCapas.add(R.raw.narnia);
-        listCapas.add(R.raw.elaafeiticeira);
+        Grupo group2 = new Grupo("John Doe");
+        group1.filhos.add("john.doe@gmail.com");
+        group1.filhos.add("doe.john@gmail.com");
 
 
 
+        ArrayList<Grupo> groups = new ArrayList<Grupo>();
+        groups.add(group1);
+        groups.add(group2);
 
+        return groups;
     }
 
 
