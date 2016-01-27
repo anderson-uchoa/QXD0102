@@ -140,6 +140,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
                <service android:name="quixada.ufc.br.kisan.services.AtualizarPerfilService"  android:exported="false"></service>
+        <service android:name="quixada.ufc.br.kisan.services.VisualizarMeusLivrosService"  android:exported="false"></service>
 
          <activity
             android:name=".activity.AddAnuncioActivity"

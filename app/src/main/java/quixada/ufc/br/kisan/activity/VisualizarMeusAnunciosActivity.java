@@ -1,16 +1,22 @@
 package quixada.ufc.br.kisan.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,19 +32,23 @@ import quixada.ufc.br.kisan.adapter.MeusLivrosAdapter;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
+import quixada.ufc.br.kisan.services.AtualizarPerfilService;
+import quixada.ufc.br.kisan.services.VisualizarMeusLivrosService;
 import quixada.ufc.br.kisan.services.WebHelper;
 import quixada.ufc.br.kisan.services.WebResult;
 
-public class VisualizarMeusAnunciosActivity extends AppCompatActivity   {
+public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
 
     private static final String TAG = "VisualizarMeusAnunciosActivity";
+
     String url = "http://10.0.2.2:8080/KisanSERVER/usuario/livros/";
 
     private ArrayList<Livro> meusLivros = new ArrayList<Livro>();
-    private ListView listView;
     private MeusLivrosAdapter meusLivrosAdapter;
+    private ListView listView;
+    CustomApplication customApplication;
+    private BroadcastReceiver broadcastReceiver;
 
-    private Intent intent;
 
 
     @Override
@@ -48,16 +58,20 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity   {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        customApplication = (CustomApplication) getApplicationContext();
 
-        CustomApplication customApplication = (CustomApplication) getApplicationContext();
-        Usuario usuario = customApplication.getUsuario();
+        //final Usuario usuario = customApplication.getUsuario();
 
-        Log.i(TAG, "usuario:"+ usuario.getId());
-        new ListarMeusLivros().execute(usuario.getId());
+       // new ListarMeusLivros().execute(usuario.getId());
 
         listView = (ListView) findViewById(R.id.listViewMeusAnuncios);
 
-         meusLivrosAdapter = new MeusLivrosAdapter(this,  meusLivros);
+        meusLivrosAdapter = new MeusLivrosAdapter(this, meusLivros);
+
+
+        Intent intent = new Intent(VisualizarMeusAnunciosActivity.this, VisualizarMeusLivrosService.class);
+        startService(intent);
+
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -67,16 +81,62 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity   {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
                 Intent intent = new Intent(getBaseContext(), AddAnuncioActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
 
+        broadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                final int serviceResult = intent.getIntExtra("result", -1);
+
+                if (serviceResult == RESULT_OK) {
+                    ArrayList<Livro> livros = (ArrayList<Livro>) intent.getSerializableExtra("data");
+                        Log.i(TAG, livros.toString());
+                    for (Livro livro : livros) {
+                        meusLivros.add(livro);
+                        listView.setAdapter(meusLivrosAdapter);
+                    }
+
+                    if (livros == null) {
+                        Toast.makeText(VisualizarMeusAnunciosActivity.this, "Você não possui livros adicionados!", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(VisualizarMeusAnunciosActivity.this, "Sua lista de livros!", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            }
+
+
+
+
+        };
     }
 
 
-    private class ListarMeusLivros extends AsyncTask<Long, Void, String>{
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("VisualizarMeusLivros"));
+
+    }
+
+
+/*
+    private class ListarMeusLivros extends AsyncTask<Long, Void, String> {
 
         final WebHelper http = new WebHelper();
         ArrayList<Livro> livros = null;
@@ -93,66 +153,35 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity   {
                 if (webResult.getHttpCode() == 200) {
 
                     final Gson parser = new Gson();
-                    livros = parser.fromJson(webResult.getHttpBody(),  new TypeToken<ArrayList<Livro>>(){}.getType());
-
-                    Log.i(TAG, "livros do usuario:"+ livros.toString());
-
-
+                    livros = parser.fromJson(webResult.getHttpBody(), new TypeToken<ArrayList<Livro>>() {
+                    }.getType());
 
                 }
             } catch (IOException e) {
 
-                Log.d(TAG, "Exception em buscar livros do usuario!", e);
+                Log.d(TAG, "Exception em Buscar livros do usuario!", e);
             }
             return null;
 
-            }
+        }
 
         @Override
         protected void onPostExecute(String s) {
-
-          for( Livro livro : livros){
-              meusLivros.add(livro);
-              listView.setAdapter(meusLivrosAdapter);
-          }
-
-            if (livros == null){
-
-                Toast.makeText(VisualizarMeusAnunciosActivity.this, "Você não possui livros anunciados!", Toast.LENGTH_SHORT).show();
-
-            }else{
-                Toast.makeText(VisualizarMeusAnunciosActivity.this, "Sua lista de livros!", Toast.LENGTH_SHORT).show();
-
+            for (Livro livro : livros) {
+                meusLivros.add(livro);
+                listView.setAdapter(meusLivrosAdapter);
             }
-             super.onPostExecute(s);
+
+            if (livros == null) {
+                Toast.makeText(VisualizarMeusAnunciosActivity.this, "Você não possui livros adicionados!", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(VisualizarMeusAnunciosActivity.this, "Sua lista de livros!", Toast.LENGTH_SHORT).show();
+            }
+            super.onPostExecute(s);
         }
     }
+
+*/
+
 }
-
-/*
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        Intent intent;
-        switch (item.getItemId()) {
-            case R.id.item_deletar:
-                Toast.makeText(this, "Deletar", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_Editar:
-                Toast.makeText(this, "Editar", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getBaseContext(), EditAnuncioActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.item_Visualizar:
-                Toast.makeText(this, "Visualizar", Toast.LENGTH_SHORT).show();
-                intent = new Intent(getBaseContext(), VisualizarAnuncioActivity.class);
-                startActivity(intent);
-
-                return true;
-
-        }
-
-    return  true;
-    }*/
-
-
-

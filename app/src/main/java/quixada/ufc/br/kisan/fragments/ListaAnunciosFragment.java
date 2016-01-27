@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -17,36 +18,30 @@ import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.activity.VisualizarAnuncioActivity;
 import quixada.ufc.br.kisan.adapter.ExpandableListAdapter;
 import quixada.ufc.br.kisan.adapter.GridViewAdapter;
+import quixada.ufc.br.kisan.adapter.MeusLivrosAdapter;
+import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Grupo;
+import quixada.ufc.br.kisan.model.Livro;
+import quixada.ufc.br.kisan.model.Usuario;
 
 
 public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenuItemClickListener  {
+    private static final String TAG = "VisualizarMeusAnunciosActivity";
 
-    /**
-     * Called when the activity is first created.
-     * */
+    String url = "http://10.0.2.2:8080/KisanSERVER/usuario/livros";
+
+    private ArrayList<Livro> todosLivros = new ArrayList<Livro>();
+    private MeusLivrosAdapter meusLivrosAdapter;
+    private ListView listView;
 
 
-    private GridView gridView;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lista_anuncios, container, false);
-
-
-
-        ExpandableListView listView = (ExpandableListView) view.findViewById(R.id.livros_list);
-
-
-        ArrayList<Grupo> groups = preparaData();
-        final ExpandableListAdapter adapter = new ExpandableListAdapter(getActivity(), groups);
-        listView.setAdapter(adapter);
-
 
         return view;
 
@@ -54,30 +49,11 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
     }
 
 
-
-    private ArrayList<Grupo> preparaData() {
-        Grupo group1 = new Grupo("John Doe");
-        group1.filhos.add("john.doe@gmail.com");
-        group1.filhos.add("doe.john@gmail.com");
-
-        Grupo group2 = new Grupo("John Doe");
-        group1.filhos.add("john.doe@gmail.com");
-        group1.filhos.add("doe.john@gmail.com");
-
-
-
-        ArrayList<Grupo> groups = new ArrayList<Grupo>();
-        groups.add(group1);
-        groups.add(group2);
-
-        return groups;
-    }
-
-
     @Override
     public void onResume() {
         super.onResume();
     }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -96,4 +72,6 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
         return  true;
     }
 
+    private class ListarTdLivros {
     }
+}

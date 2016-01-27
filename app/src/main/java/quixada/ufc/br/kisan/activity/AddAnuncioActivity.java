@@ -1,5 +1,6 @@
 package quixada.ufc.br.kisan.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.List;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.adapter.MeusLivrosAdapter;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Autor;
 import quixada.ufc.br.kisan.model.Genero;
@@ -42,7 +44,7 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
     private EditText edtAutor;
     private Button addLivro;
 
-    private String arquivo;
+    private MeusLivrosAdapter meusLivrosAdapter;
 
     private Livro livro;
 
@@ -78,15 +80,12 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
                 livro.setTitulo(edtTitulo.getText().toString());
                 livro.setSinopse(edtDescricao.getText().toString());
 
-
                 new adiocionarLivro().execute(url);
             }
         });
 
 
         }
-
-
 
     private class adiocionarLivro extends AsyncTask<String, Void, String> {
 
@@ -103,8 +102,9 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
                 final WebResult webResult = http.executeHTTP(url, "POST", body);
                 if(webResult.getHttpCode() == 200) {
 
-                    novoLivro = parser.fromJson(webResult.getHttpBody(), Livro.class);
+                 novoLivro = parser.fromJson(webResult.getHttpBody(), Livro.class);
                 }
+
 
             } catch (IOException e) {
                 Log.d(TAG, "Exception calling add service", e);
@@ -116,17 +116,26 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+
+
+
             edtDescricao.setText("");
             edtTitulo.setText("");
             edtGenero.setText("");
             edtAutor.setText("");
 
+
             Toast.makeText(AddAnuncioActivity.this, "Livro adicionado com sucesso!", Toast.LENGTH_SHORT).show();
 
 
         }
+
+
     }
 
+    }
 
 /*
     private class adiocionarLivro extends AsyncTask<String, Void, String> {
@@ -242,6 +251,6 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
         super.onActivityResult(requestCode, resultCode, data);
     }
     */
-}
+
 
 

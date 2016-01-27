@@ -48,7 +48,6 @@ public class VisualizarPerfilActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         usuario = new Usuario();
 
         customApplication = (CustomApplication) this.getApplicationContext();
@@ -64,9 +63,7 @@ public class VisualizarPerfilActivity extends AppCompatActivity {
 
         btnAtualizar = (Button) findViewById(R.id.btn_Atualizar_perfil);
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 
         this.btnAtualizar.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +108,6 @@ public class VisualizarPerfilActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -122,16 +118,9 @@ public class VisualizarPerfilActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter("AtualizarPerfil"));
 
     }
-
-
-
-
-
-
 
 
 
