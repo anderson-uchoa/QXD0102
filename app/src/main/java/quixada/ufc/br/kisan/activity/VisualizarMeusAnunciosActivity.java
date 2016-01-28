@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,35 +12,24 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 
-import android.widget.AdapterView;
+
 import android.widget.ListView;
 import android.widget.Toast;
-
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.MeusLivrosAdapter;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
-import quixada.ufc.br.kisan.model.Usuario;
-import quixada.ufc.br.kisan.services.AtualizarPerfilService;
 import quixada.ufc.br.kisan.services.VisualizarMeusLivrosService;
-import quixada.ufc.br.kisan.services.WebHelper;
-import quixada.ufc.br.kisan.services.WebResult;
 
 public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
 
     private static final String TAG = "VisualizarMeusAnunciosActivity";
 
-    String url = "http://10.0.2.2:8080/KisanSERVER/usuario/livros/";
+  //  String url = "http://10.0.2.2:8080/KisanSERVER/usuario/livros/";
 
     private ArrayList<Livro> meusLivros = new ArrayList<Livro>();
     private MeusLivrosAdapter meusLivrosAdapter;
@@ -60,9 +48,6 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         customApplication = (CustomApplication) getApplicationContext();
 
-        //final Usuario usuario = customApplication.getUsuario();
-
-       // new ListarMeusLivros().execute(usuario.getId());
 
         listView = (ListView) findViewById(R.id.listViewMeusAnuncios);
 
@@ -97,10 +82,15 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
                 if (serviceResult == RESULT_OK) {
                     ArrayList<Livro> livros = (ArrayList<Livro>) intent.getSerializableExtra("data");
                         Log.i(TAG, livros.toString());
+
                     for (Livro livro : livros) {
                         meusLivros.add(livro);
                         listView.setAdapter(meusLivrosAdapter);
                     }
+
+                    meusLivrosAdapter.setListData(meusLivros);
+                    meusLivrosAdapter.notifyDataSetChanged();
+
 
                     if (livros == null) {
                         Toast.makeText(VisualizarMeusAnunciosActivity.this, "Você não possui livros adicionados!", Toast.LENGTH_SHORT).show();

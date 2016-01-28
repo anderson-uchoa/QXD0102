@@ -16,16 +16,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 
-import java.io.File;
-import java.io.FileInputStream;
+
 import java.io.IOException;
-import java.util.List;
 
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.MeusLivrosAdapter;
 import quixada.ufc.br.kisan.application.CustomApplication;
-import quixada.ufc.br.kisan.model.Autor;
-import quixada.ufc.br.kisan.model.Genero;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.services.WebHelper;
 import quixada.ufc.br.kisan.services.WebResult;
@@ -33,7 +29,6 @@ import quixada.ufc.br.kisan.services.WebResult;
 public class AddAnuncioActivity extends AppCompatActivity {
 
 
-//    String url = "http://10.0.2.2:8080/KisanSERVER/livros";
 String url = "http://10.0.2.2:8080/KisanSERVER/livros";
     private static final String TAG = "AddAnuncioActivity";
 
@@ -116,16 +111,16 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-
-
 
             edtDescricao.setText("");
             edtTitulo.setText("");
             edtGenero.setText("");
             edtAutor.setText("");
 
+
+            Intent intent = new Intent(AddAnuncioActivity.this, VisualizarMeusAnunciosActivity.class);
+            startActivity(intent);
+            finish();
 
             Toast.makeText(AddAnuncioActivity.this, "Livro adicionado com sucesso!", Toast.LENGTH_SHORT).show();
 
