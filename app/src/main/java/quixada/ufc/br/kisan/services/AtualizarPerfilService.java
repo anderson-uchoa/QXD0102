@@ -48,7 +48,7 @@ public class AtualizarPerfilService extends Service{
                    int result = -1;
                    Usuario results = null;
                    final Gson parser = new Gson();
-                   final String url = "http://10.0.2.2:8080/KisanSERVER/usuario";
+                   final String url = "http://192.168.1.33:8080/KisanSERVER/usuario";
 
                    try {
                        final String body = parser.toJson(usuario, Usuario.class);

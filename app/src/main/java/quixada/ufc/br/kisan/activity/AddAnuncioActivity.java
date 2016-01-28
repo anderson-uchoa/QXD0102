@@ -29,7 +29,7 @@ import quixada.ufc.br.kisan.services.WebResult;
 public class AddAnuncioActivity extends AppCompatActivity {
 
 
-String url = "http://10.0.2.2:8080/KisanSERVER/livros";
+String url = "http://192.168.1.33:8080/KisanSERVER/livros";
     private static final String TAG = "AddAnuncioActivity";
 
 
@@ -38,6 +38,7 @@ String url = "http://10.0.2.2:8080/KisanSERVER/livros";
     private EditText edtGenero;
     private EditText edtAutor;
     private Button addLivro;
+    
 
     private MeusLivrosAdapter meusLivrosAdapter;
 

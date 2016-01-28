@@ -28,7 +28,7 @@ public class PreProcessamentoActivity extends AppCompatActivity {
 
     private static final String TAG = "PreProcessamentoActivity";
     private Usuario usuario1;
-    String url = "http://10.0.2.2:8080/KisanSERVER/usuario/buscarIdFacebook/";
+    String url = "http://192.168.1.33:8080/KisanSERVER/usuario/buscarIdFacebook/";
 
 
     @Override
@@ -129,7 +129,7 @@ public class PreProcessamentoActivity extends AppCompatActivity {
             final WebHelper http = new WebHelper();
             Usuario novoUsuario = null;
 
-            final String url = "http://10.0.2.2:8080/KisanSERVER/usuario";
+            final String url = "http://10.0.2.218:8080/KisanSERVER/usuario";
             final Gson parser = new Gson();
 
             try {

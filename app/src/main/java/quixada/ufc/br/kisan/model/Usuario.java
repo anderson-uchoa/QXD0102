@@ -26,7 +26,7 @@ public class Usuario implements Serializable {
 
 	private Long id_facebook;
 
-	private Byte[] foto;
+	private Byte[ ] foto;
 
 	private String nome;
 
