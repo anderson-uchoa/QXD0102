@@ -41,7 +41,7 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:label="Kisan"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -142,8 +142,10 @@
 
                <service android:name="quixada.ufc.br.kisan.services.AtualizarPerfilService"  android:exported="false"></service>
         <service android:name="quixada.ufc.br.kisan.services.VisualizarMeusLivrosService"  android:exported="false"></service>
+        <service android:name="quixada.ufc.br.kisan.services.ListarLivrosService"  android:exported="false"></service>
 
-         <activity
+
+        <activity
             android:name=".activity.AddAnuncioActivity"
             android:label="@string/title_activity_add_anuncio2"
             android:theme="@style/AppTheme.NoActionBar"></activity>

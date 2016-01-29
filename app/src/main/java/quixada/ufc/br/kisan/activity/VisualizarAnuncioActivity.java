@@ -16,6 +16,7 @@ public class VisualizarAnuncioActivity extends AppCompatActivity {
 
     private ImageButton btnChat;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

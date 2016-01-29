@@ -25,7 +25,6 @@ public class TabAdapter extends FragmentPagerAdapter {
 
         if(position == 0){
             ListaAnunciosFragment anunciosFragments = new ListaAnunciosFragment();
-
         return  anunciosFragments;
 
         }else{
