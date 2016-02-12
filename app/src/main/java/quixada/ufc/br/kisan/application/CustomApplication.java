@@ -17,7 +17,7 @@ public class CustomApplication extends Application {
     private String ip;
 
 public  CustomApplication (){
-    this.ip = "192.168.1.4:8080";
+    this.ip = "192.168.1.37:8080";
 }
 
 
