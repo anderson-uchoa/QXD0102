@@ -28,7 +28,8 @@ public class PreProcessamentoActivity extends AppCompatActivity {
 
     private static final String TAG = "PreProcessamentoActivity";
     private Usuario usuario1;
-    String url = "http://192.168.1.33:8080/KisanSERVER/usuario/buscarIdFacebook/";
+    private CustomApplication application = new CustomApplication();
+    String url = "http://"+application.getIp()+"/KisanSERVER/usuario/buscarIdFacebook/";
 
 
     @Override
@@ -37,7 +38,9 @@ public class PreProcessamentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pre_processamento);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //application.setIp("10.0.2.218:8080");
 
+Log.i(TAG, "sdcsdvsdvsdvcasc:"+application.getIp());
 
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -129,7 +132,8 @@ public class PreProcessamentoActivity extends AppCompatActivity {
             final WebHelper http = new WebHelper();
             Usuario novoUsuario = null;
 
-            final String url = "http://10.0.2.218:8080/KisanSERVER/usuario";
+
+            final String url = "http://"+application.getIp()+"/KisanSERVER/usuario";
             final Gson parser = new Gson();
 
             try {

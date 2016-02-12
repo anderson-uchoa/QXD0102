@@ -88,7 +88,6 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
                         listView.setAdapter(meusLivrosAdapter);
                     }
 
-                    meusLivrosAdapter.setListData(meusLivros);
                     meusLivrosAdapter.notifyDataSetChanged();
 
 

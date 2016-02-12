@@ -89,8 +89,11 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (position){
                     case 1:
-                        intent = new Intent(getApplicationContext(), VisualizarPerfilActivity.class);
-                        startActivity(intent);
+                        intent = new Intent(getApplicationContext(), MapsActivity.class);
+                           startActivity(intent);
+
+                        //    intent = new Intent(getApplicationContext(), VisualizarPerfilActivity.class);
+                    //    startActivity(intent);
                         Toast.makeText(MainActivity.this, "Perfil!", Toast.LENGTH_SHORT).show();
                         break;
                     case 2:

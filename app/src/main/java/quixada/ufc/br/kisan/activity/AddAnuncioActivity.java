@@ -28,8 +28,8 @@ import quixada.ufc.br.kisan.services.WebResult;
 
 public class AddAnuncioActivity extends AppCompatActivity {
 
-
-String url = "http://192.168.1.33:8080/KisanSERVER/livros";
+    private CustomApplication application = new CustomApplication();
+    String url = "http://"+application.getIp()+"/KisanSERVER/livros";
     private static final String TAG = "AddAnuncioActivity";
 
 
@@ -54,12 +54,11 @@ String url = "http://192.168.1.33:8080/KisanSERVER/livros";
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
         edtTitulo = (EditText) findViewById(R.id.input_titulo_livro);
         edtDescricao = (EditText) findViewById(R.id.input_descricao_livro);
         addLivro = (Button) findViewById(R.id.btn_Adicionar_livro);
         edtAutor = (EditText) findViewById(R.id.input_autor_livro);
-        edtGenero =  (EditText) findViewById(R.id.input_genero_livro);
+        edtGenero =  (EditText) findViewById(R.id.spinner_livro);
 
         livro = new Livro();
 
@@ -75,7 +74,7 @@ String url = "http://192.168.1.33:8080/KisanSERVER/livros";
 
                 livro.setTitulo(edtTitulo.getText().toString());
                 livro.setSinopse(edtDescricao.getText().toString());
-
+                livro.setGenero(edtGenero.getText().toString());
                 new adiocionarLivro().execute(url);
             }
         });

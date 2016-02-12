@@ -18,11 +18,11 @@ import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
 
 /**
- * Created by andersonuchoa on 28/01/16.
+ * Created by andersonuchoa on 07/02/16.
  */
-public class ListarLivrosService  extends Service {
-    private static final String TAG = "ListarLivrosService";
-
+public class ListarLivrosWhishListService extends Service {
+    private static final String TAG = "ListarLivrosWhishListService";
+    CustomApplication customApplication;
 
     @Override
     public void onCreate() {
@@ -37,6 +37,10 @@ public class ListarLivrosService  extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        customApplication = (CustomApplication) getApplicationContext();
+
+        final Usuario usuario = customApplication.getUsuario();
+
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -45,11 +49,12 @@ public class ListarLivrosService  extends Service {
                 final WebHelper http = new WebHelper();
                 ArrayList<Livro> livros = null;
                 CustomApplication application = new CustomApplication();
-                String url = "http://"+application.getIp()+"/KisanSERVER/livros";
+                String url = "http://"+application.getIp()+"/KisanSERVER/livros/livrosUsuarioWishList/";
 
+                String url_m = url + usuario.getId();
 
                 try {
-                    final WebResult webResult = http.executeHTTP(url, "GET", null);
+                    final WebResult webResult = http.executeHTTP(url_m, "GET", null);
 
                     if (webResult.getHttpCode() == 200) {
 
@@ -59,10 +64,10 @@ public class ListarLivrosService  extends Service {
 
                     }
 
-                    Intent sendBack = new Intent("ListarLivros");
+                    Intent sendBack = new Intent("ListarLivrosWhishList");
                     sendBack.putExtra("result", result);
                     sendBack.putExtra("data", livros);
-                    LocalBroadcastManager.getInstance(ListarLivrosService.this).sendBroadcast(sendBack);
+                    LocalBroadcastManager.getInstance(ListarLivrosWhishListService.this).sendBroadcast(sendBack);
 
                 } catch (IOException e) {
 
@@ -74,6 +79,5 @@ public class ListarLivrosService  extends Service {
 
         return Service.START_STICKY;
     }
-
 
 }

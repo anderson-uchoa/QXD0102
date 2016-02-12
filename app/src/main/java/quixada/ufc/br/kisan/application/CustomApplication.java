@@ -14,6 +14,11 @@ import quixada.ufc.br.kisan.model.Usuario;
 public class CustomApplication extends Application {
 
     private Usuario usuario;
+    private String ip;
+
+public  CustomApplication (){
+    this.ip = "192.168.1.4:8080";
+}
 
 
     @Override
@@ -50,5 +55,13 @@ public class CustomApplication extends Application {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

@@ -37,22 +37,16 @@
             android:layout_height="wrap_content"
             android:hint="Autor"/>
 
-        <EditText android:id="@+id/input_genero_livro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Genero"/>
-
-
         <EditText android:id="@+id/input_descricao_livro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descrição"/>
 
-        <Spinner
+        <EditText
+            android:id="@+id/spinner_livro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerGenero"
-            android:layout_gravity="center_horizontal" />
+            android:hint="Genero"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_Adicionar_livro"

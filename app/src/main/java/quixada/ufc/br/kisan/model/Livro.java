@@ -26,7 +26,7 @@ public class Livro implements Serializable {
 
     private List<Autor> autores;
 
-    private List<Genero> generos;
+    private String genero;
 
     public Livro() {
 
@@ -80,14 +80,13 @@ public class Livro implements Serializable {
         this.autores = autores;
     }
 
-    public List<Genero> getGeneros() {
-        return generos;
+    public String getGenero() {
+        return genero;
     }
 
-    public void setGeneros(List<Genero> generos) {
-        this.generos = generos;
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
-
 
     public byte[] getFoto() {
         return foto;
@@ -101,13 +100,13 @@ public class Livro implements Serializable {
     public String toString() {
         return "Livro{" +
                 "id=" + id +
-                ", foto=" + foto +
+                ", foto=" + Arrays.toString(foto) +
                 ", titulo='" + titulo + '\'' +
                 ", sinopse='" + sinopse + '\'' +
                 ", numeroPaginas='" + numeroPaginas + '\'' +
                 ", usuario=" + usuario +
                 ", autores=" + autores +
-                ", generos=" + generos +
+                ", genero='" + genero + '\'' +
                 '}';
     }
 }

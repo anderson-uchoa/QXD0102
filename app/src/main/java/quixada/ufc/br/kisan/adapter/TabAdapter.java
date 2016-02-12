@@ -28,7 +28,8 @@ public class TabAdapter extends FragmentPagerAdapter {
         return  anunciosFragments;
 
         }else{
-            return new WishListFragment();
+            WishListFragment wishListFragment = new WishListFragment();
+            return  wishListFragment;
         }
 
     }

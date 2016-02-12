@@ -35,4 +35,16 @@
     <string name="title_activity_pre_processamento">PreProcessamentoActivity</string>
     <string name="title_activity_add_anuncio2">Adicionar livro</string>
 
+
+    <string-array name="spinner_genero_livro">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
 </resources>
