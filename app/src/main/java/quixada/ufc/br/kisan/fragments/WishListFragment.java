@@ -4,32 +4,39 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.activity.MapsActivity;
 import quixada.ufc.br.kisan.adapter.EpandableListWishAdapter;
-import quixada.ufc.br.kisan.adapter.ExpandableListAdapter;
+import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
-import quixada.ufc.br.kisan.services.ListarLivrosService;
 import quixada.ufc.br.kisan.services.ListarLivrosWhishListService;
+import quixada.ufc.br.kisan.services.WebHelper;
+import quixada.ufc.br.kisan.services.WebResult;
 
 
-public class WishListFragment extends Fragment {
+public class WishListFragment extends Fragment implements OnCustomClickListener {
 
 
     private static final String TAG = "WishListFragment";
@@ -37,6 +44,7 @@ public class WishListFragment extends Fragment {
     EpandableListWishAdapter listAdapter;
     ExpandableListView expListView;
     CustomApplication application = new CustomApplication();
+    private static final String BUSCAR_PROPRIETARIO_LIVRO = "buscar-proproetario-livro";
 
 
     String url = "http://"+application.getIp()+"/KisanSERVER/livros/livrosUsuarioWishList/";
@@ -55,6 +63,8 @@ public class WishListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_wish_list, container, false);
 
 
+        EventBus.getDefault().register(this);
+
 
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView);
@@ -66,7 +76,7 @@ public class WishListFragment extends Fragment {
         }
 
 
-        listAdapter = new EpandableListWishAdapter(getActivity(), tdLivros);
+        listAdapter = new EpandableListWishAdapter(getActivity(), tdLivros, this);
         Intent intent = new Intent(getActivity(), ListarLivrosWhishListService.class);
         getActivity().startService(intent);
 
@@ -79,47 +89,72 @@ public class WishListFragment extends Fragment {
 
                 final int serviceResult = intent.getIntExtra("result", -1);
 
-                if (serviceResult == getActivity().RESULT_OK) {
-                    ArrayList<Livro> livros = (ArrayList<Livro>) intent.getSerializableExtra("data");
-                    Log.i(TAG, livros.toString());
 
-                    for (Livro livro : livros) {
-                        tdLivros.add(livro);
-                        expListView.setAdapter(listAdapter);
-                    }
-
-                    listAdapter.setListData(tdLivros);
-                    listAdapter.notifyDataSetChanged();
+                if (serviceResult == getActivity().RESULT_OK){
 
 
-                    if (livros == null) {
-                        Toast.makeText(getActivity(), "Você não possui livros em sua lista de desejos !", Toast.LENGTH_SHORT).show();
+                            ArrayList<Livro> livros = (ArrayList<Livro>) intent.getSerializableExtra("data");
+                            Log.i(TAG, livros.toString());
 
-                    } else {
-                        Toast.makeText(getActivity(), "Seus livros desejados", Toast.LENGTH_SHORT).show();
-                    }
+                            for (Livro livro : livros) {
+                                tdLivros.add(livro);
+                                expListView.setAdapter(listAdapter);
+                            }
 
-                }
-            }
+                           // listAdapter.setListData(tdLivros);
+                            //listAdapter.notifyDataSetChanged();
+
+
+                            if (livros == null) {
+                                Toast.makeText(getActivity(), "Você não possui livros em sua lista de desejos !", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(getActivity(), "Seus livros desejados", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                        }
+
+
+
+           //     if (serviceResult == getActivity().RESULT_OK) {
+            //        ArrayList<Livro> livros = (ArrayList<Livro>) intent.getSerializableExtra("data");
+            //         Log.i(TAG, livros.toString());
+            //
+            //        for (Livro livro : livros) {
+            //            tdLivros.add(livro);
+            //            expListView.setAdapter(listAdapter);
+            //        }
+
+            //        listAdapter.setListData(tdLivros);
+            //       listAdapter.notifyDataSetChanged();
+
+
+            //       if (livros == null) {
+            //            Toast.makeText(getActivity(), "Você não possui livros em sua lista de desejos !", Toast.LENGTH_SHORT).show();
+
+            //       } else {
+            //          Toast.makeText(getActivity(), "Seus livros desejados", Toast.LENGTH_SHORT).show();
+            //      }
+
+            //  }
+            //  }
 
 
 
 
         };
 
-        onStarClick();
-
-
         return view;
 
+    }
 
+    @Subscribe
+    public void OnEvent( Livro livro){
+        listAdapter.addNovoLivro(livro);
     }
 
 
-    private void onStarClick(){
-
-
-    }
     @Override
     public void onPause() {
         super.onPause();
@@ -133,6 +168,57 @@ public class WishListFragment extends Fragment {
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("ListarLivrosWhishList"));
 
     }
+
+    @Override
+    public void OnCustomClick(View view, Long position) {
+        Log.i(TAG, "id:" + position);
+        new addBuscarProprietarioLivro().execute(position);
+    }
+
+
+
+    private class addBuscarProprietarioLivro extends AsyncTask<Long,Void, String> {
+
+        final WebHelper http = new WebHelper();
+        Livro livro = null;
+        final Gson parser = new Gson();
+        String url = "http://"+application.getIp()+"/KisanSERVER/livros/";
+
+
+        protected String doInBackground(Long... urls) {
+
+            Long id = urls[0];
+            String url_m = url + id;
+
+            try {
+
+                final WebResult webResult = http.executeHTTP(url_m, "GET", null);
+                if(webResult.getHttpCode() == 200) {
+
+                   livro  = parser.fromJson(webResult.getHttpBody(), Livro.class);
+                }
+
+            } catch (IOException e) {
+                Log.d(TAG, "Exception calling add service", e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Intent intent = new Intent(getActivity(), MapsActivity.class);
+        //    intent.putExtra("usuario", livro.getUsuario());
+            getActivity().startActivity(intent);
+
+
+        }
+
+    }
+
+    }
+
 
     /*
 
@@ -198,4 +284,3 @@ public class WishListFragment extends Fragment {
         return false;
     }
     */
-}

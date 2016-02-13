@@ -169,6 +169,10 @@
             android:name=".services.ListarLivrosService"
             android:exported="false" />
 
+        <service
+            android:name=".services.BuscarProprietarioLivroService"
+            android:exported="false" />
+
         <activity
             android:name=".activity.AddAnuncioActivity"
             android:label="@string/title_activity_add_anuncio2"

@@ -30,9 +30,12 @@ public class MeusLivrosAdapter extends BaseAdapter{
 
    }
 
-    public void setListData(ArrayList<Livro> data){
-        livros = data;
+
+    public void addNovoLivro(Livro livro){
+       livros.add(livro);
+        notifyDataSetChanged();
     }
+
     @Override
     public int getCount() {
         return livros.size();

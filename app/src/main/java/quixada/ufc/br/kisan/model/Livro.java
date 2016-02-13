@@ -24,7 +24,7 @@ public class Livro implements Serializable {
 
     private Usuario usuario;
 
-    private List<Autor> autores;
+    private String  autor;
 
     private String genero;
 
@@ -72,12 +72,12 @@ public class Livro implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Autor> getAutores() {
-        return autores;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setAutores(List<Autor> autores) {
-        this.autores = autores;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public String getGenero() {
@@ -105,7 +105,7 @@ public class Livro implements Serializable {
                 ", sinopse='" + sinopse + '\'' +
                 ", numeroPaginas='" + numeroPaginas + '\'' +
                 ", usuario=" + usuario +
-                ", autores=" + autores +
+                ", autor='" + autor + '\'' +
                 ", genero='" + genero + '\'' +
                 '}';
     }

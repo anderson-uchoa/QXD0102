@@ -1,6 +1,7 @@
 package quixada.ufc.br.kisan.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.fragments.ListaAnunciosFragment;
+import quixada.ufc.br.kisan.fragments.WishListFragment;
 import quixada.ufc.br.kisan.model.Livro;
 
 /**
@@ -22,18 +24,21 @@ public class EpandableListWishAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private ArrayList<Livro> _livros;
     private boolean flagImage;
-    private OnCustomClickListener callBack = new ListaAnunciosFragment();
+    private OnCustomClickListener callBack;
 
 
-    public EpandableListWishAdapter(Context context,ArrayList<Livro> livros) {
+    public EpandableListWishAdapter(Context context,ArrayList<Livro> livros, OnCustomClickListener callBack) {
         this._context = context;
         this._livros = livros;
         this.flagImage = true;
+        this.callBack = callBack;
 
     }
 
-    public void setListData(ArrayList<Livro> data){
-        _livros = data;
+
+    public void addNovoLivro(Livro livro){
+        _livros.add(livro);
+        notifyDataSetChanged();
     }
 
 
@@ -97,7 +102,9 @@ public class EpandableListWishAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = _livros.get(groupPosition).getTitulo();
+        final Livro livro = _livros.get(groupPosition);
+
+        String headerTitle = livro.getTitulo();
         //Integer capa = _livros.get(groupPosition).getImagem();
 
         Integer capa = R.drawable.images;
@@ -115,20 +122,13 @@ public class EpandableListWishAdapter extends BaseExpandableListAdapter {
         lblListHeader.setText(headerTitle);
         imagem.setImageResource(capa);
 
-        final ImageView favorite = (ImageView) convertView.findViewById(R.id.favoriteView);
+        final ImageView visualizar_localicacao = (ImageView) convertView.findViewById(R.id.visualizarLocalicacao);
 
-        favorite.setOnClickListener(new View.OnClickListener() {
+        visualizar_localicacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if ( flagImage ) {
-                    favorite.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    callBack.OnCustomClick(v, groupPosition);
 
-                    flagImage = false;
-                }else{
-                    favorite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    flagImage = true;
-                }
+                callBack.OnCustomClick(v, livro.getId());
             }
         });
 

@@ -25,13 +25,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private Context _context;
     private ArrayList<Livro> _livros;
     private boolean flagImage;
-    private OnCustomClickListener callBack = new ListaAnunciosFragment();
+    private OnCustomClickListener callBack;
 
 
-    public ExpandableListAdapter(Context context,ArrayList<Livro> livros) {
+    public ExpandableListAdapter(Context context,ArrayList<Livro> livros, OnCustomClickListener onCustomClickListeners) {
         this._context = context;
         this._livros = livros;
         this.flagImage = true;
+        this.callBack = onCustomClickListeners;
 
     }
 
@@ -63,11 +64,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView proprietario = (TextView)convertView.findViewById(R.id.proprietario);
         TextView localizacao = (TextView)convertView.findViewById(R.id.localizacao);
 
-        autor.setText("");
-        genero.setText("default");
+        autor.setText(child.getAutor());
+        genero.setText(child.getGenero());
         sinopse.setText(child.getSinopse());
         proprietario.setText(child.getUsuario().getNome());
-        localizacao.setText("default");
+        localizacao.setText(child.getUsuario().getCidade());
 
         return convertView;
     }
@@ -95,7 +96,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        String headerTitle = _livros.get(groupPosition).getTitulo();
+        final Livro livro = _livros.get(groupPosition);
+        String headerTitle = livro.getTitulo();
         //Integer capa = _livros.get(groupPosition).getImagem();
 
         Integer capa = R.drawable.images;
@@ -120,8 +122,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 if ( flagImage ) {
                     favorite.setImageResource(R.drawable.ic_favorite_black_24dp);
-                 callBack.OnCustomClick(v, groupPosition);
-
+                 callBack.OnCustomClick(v,livro.getId());
                     flagImage = false;
                 }else{
                     favorite.setImageResource(R.drawable.ic_favorite_border_black_24dp);

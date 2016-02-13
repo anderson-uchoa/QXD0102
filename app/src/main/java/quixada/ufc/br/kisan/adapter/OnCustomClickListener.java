@@ -5,5 +5,5 @@ import android.view.View;
 
 public interface OnCustomClickListener {
 
-    public void OnCustomClick(View view, int position);
+    public void OnCustomClick(View view, Long position);
 }

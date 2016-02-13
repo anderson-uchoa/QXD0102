@@ -38,7 +38,6 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
     private BroadcastReceiver broadcastReceiver;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +55,6 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
 
         Intent intent = new Intent(VisualizarMeusAnunciosActivity.this, VisualizarMeusLivrosService.class);
         startService(intent);
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -88,8 +85,6 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
                         listView.setAdapter(meusLivrosAdapter);
                     }
 
-                    meusLivrosAdapter.notifyDataSetChanged();
-
 
                     if (livros == null) {
                         Toast.makeText(VisualizarMeusAnunciosActivity.this, "Você não possui livros adicionados!", Toast.LENGTH_SHORT).show();
@@ -108,6 +103,17 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity {
         };
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 2 ){
+            if(resultCode == 1){
+              meusLivrosAdapter.addNovoLivro((Livro) data.getSerializableExtra("livro"));
+            }
+
+        }
+    }
 
     @Override
     protected void onPause() {

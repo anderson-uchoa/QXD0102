@@ -3,54 +3,52 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.activity.VisualizarAnuncioActivity;
-import quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity;
 import quixada.ufc.br.kisan.adapter.ExpandableListAdapter;
 import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
 import quixada.ufc.br.kisan.services.ListarLivrosService;
-import quixada.ufc.br.kisan.services.ListarLivrosWhishListService;
 import quixada.ufc.br.kisan.services.WebHelper;
 import quixada.ufc.br.kisan.services.WebResult;
 
-public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenuItemClickListener,OnCustomClickListener {
-    private static final String TAG = "VisualizarMeusAnunciosActivity";
+public class ListaAnunciosFragment extends Fragment  implements OnCustomClickListener {
+    private static final String TAG = "ListaAnunciosFragment";
 
-    ExpandableListAdapter listAdapter;
-    ExpandableListView expListView;
     CustomApplication application = new CustomApplication();
     String url = "http://"+application.getIp()+"/KisanSERVER/livros/insereLivroWishList/";
 
-
+    ExpandableListAdapter listAdapter;
+    ExpandableListView expListView;
     private ProgressBar progressBar;
     private ArrayList<Livro> tdLivros = new ArrayList<Livro>();
     private BroadcastReceiver broadcastReceiver;
-    Usuario usuario = null;
+
+   private Usuario usuario = null;
 
     private Livro livro;
+    private long id;
 
 
     @Override
@@ -61,23 +59,30 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
 
 
 
+
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView_wishlist);
 
-      if (tdLivros.size() <= 0 ){
+        application = (CustomApplication) getActivity().getApplicationContext();
+        usuario = application.getUsuario();
+        id = usuario.getId();
+
+        Log.i( TAG, usuario.getId().toString());
+
+
+
+        if (tdLivros.size() <= 0 ){
            progressBar.setVisibility(view.GONE);
        }else{
           progressBar.setVisibility(View.VISIBLE);
       }
 
 
-        listAdapter = new ExpandableListAdapter(getActivity(), tdLivros);
+        listAdapter = new ExpandableListAdapter(getActivity(), tdLivros, this);
         Intent intent = new Intent(getActivity(), ListarLivrosService.class);
         getActivity().startService(intent);
 
 
-        application = (CustomApplication) getActivity().getApplicationContext();
-        usuario = application.getUsuario();
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -103,82 +108,50 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
                 }
             }
 
-
-
-
         };
-
-        onStarClick();
-
 
         return view;
 
-
     }
 
 
-    private void onStarClick(){
+    //@Override
+    // public boolean onMenuItemClick(MenuItem item) {
+    //    switch (item.getItemId()) {
+    //        case R.id.item_AddWishList:
+    //            Toast.makeText(getActivity(), "Adicionado na WishList", Toast.LENGTH_SHORT).show();
+    //            return true;
+    //        case R.id.item_Visualizar:
+    //            Toast.makeText(getActivity(), "Visualizar Livro", Toast.LENGTH_SHORT).show();
+    //            Intent intent = new Intent(getContext(), VisualizarAnuncioActivity.class);
+    //            startActivity(intent);
 
+    //            return true;
+    //    }
 
-    }
-    @Override
-    public void onPause() {
-        super.onPause();
-        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("ListarLivros"));
-
-    }
-
-
-
+    //    return  true;
+    // }
 
 
     @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_AddWishList:
-                Toast.makeText(getActivity(), "Adicionado na WishList", Toast.LENGTH_SHORT).show();
-                return true;
-            case R.id.item_Visualizar:
-                Toast.makeText(getActivity(), "Visualizar Livro", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), VisualizarAnuncioActivity.class);
-                startActivity(intent);
-
-                return true;
-        }
-
-        return  true;
-    }
-
-
-
-
-    @Override
-    public void OnCustomClick(View view, int position) {
+    public void OnCustomClick(View view, Long position) {
       livro = new Livro();
-      livro.setId((long) position);
+      livro.setId( position);
 
-        new addLivroWhishlist().execute(Long.valueOf(11));
-
+        Log.i(TAG, "usuario:" + id);
+        new addLivroWhishlist().execute(id);
 
     }
 
-    private class addLivroWhishlist extends AsyncTask<Long,Void, String>{
+    private class addLivroWhishlist extends AsyncTask<Long,Void, Livro>{
 
         final WebHelper http = new WebHelper();
         Livro novoLivroWishlist = null;
         final Gson parser = new Gson();
 
-        protected String doInBackground(Long... urls) {
+        protected Livro doInBackground(Long... urls) {
 
             Long id = urls[0];
-
             String url_m = url + id;
 
             try {
@@ -190,25 +163,44 @@ public class ListaAnunciosFragment extends Fragment  implements PopupMenu.OnMenu
                     novoLivroWishlist = parser.fromJson(webResult.getHttpBody(), Livro.class);
                 }
 
-
             } catch (IOException e) {
                 Log.d(TAG, "Exception calling add service", e);
             }
 
-            return null;
+            return novoLivroWishlist;
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Livro s) {
             super.onPostExecute(s);
-            Intent intent = new Intent(getActivity(), ListarLivrosWhishListService.class);
-            getActivity().startService(intent);
+            EventBus.getDefault().post(s);
+
+
+
+          //Intent intent = new Intent(getActivity(), ListarLivrosWhishListService.class);
+           //getActivity().startService(intent);
 
 
 
         }
 
 
+
+    }
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(broadcastReceiver);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(broadcastReceiver, new IntentFilter("ListarLivros"));
 
     }
 }

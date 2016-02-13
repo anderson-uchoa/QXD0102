@@ -75,6 +75,8 @@ public class AddAnuncioActivity extends AppCompatActivity {
                 livro.setTitulo(edtTitulo.getText().toString());
                 livro.setSinopse(edtDescricao.getText().toString());
                 livro.setGenero(edtGenero.getText().toString());
+                livro.setAutor(edtAutor.getText().toString());
+
                 new adiocionarLivro().execute(url);
             }
         });
@@ -92,7 +94,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             try {
-
                 final String body = parser.toJson(livro, Livro.class);
                 final WebResult webResult = http.executeHTTP(url, "POST", body);
                 if(webResult.getHttpCode() == 200) {
@@ -117,9 +118,11 @@ public class AddAnuncioActivity extends AppCompatActivity {
             edtGenero.setText("");
             edtAutor.setText("");
 
+            Intent intent = new Intent();
+            intent.putExtra("livro", livro);
 
-            Intent intent = new Intent(AddAnuncioActivity.this, VisualizarMeusAnunciosActivity.class);
-            startActivity(intent);
+            AddAnuncioActivity.this.setResult(1, intent);
+
             finish();
 
             Toast.makeText(AddAnuncioActivity.this, "Livro adicionado com sucesso!", Toast.LENGTH_SHORT).show();
