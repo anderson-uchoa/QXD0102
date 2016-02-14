@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.adapter.ExpandableListAdapter;
+import quixada.ufc.br.kisan.adapter.ExpandableListAnunciosAdapter;
 import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
@@ -39,7 +39,7 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
     CustomApplication application = new CustomApplication();
     String url = "http://"+application.getIp()+"/KisanSERVER/livros/insereLivroWishList/";
 
-    ExpandableListAdapter listAdapter;
+    ExpandableListAnunciosAdapter listAdapter;
     ExpandableListView expListView;
     private ProgressBar progressBar;
     private ArrayList<Livro> tdLivros = new ArrayList<Livro>();
@@ -78,7 +78,7 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
       }
 
 
-        listAdapter = new ExpandableListAdapter(getActivity(), tdLivros, this);
+        listAdapter = new ExpandableListAnunciosAdapter(getActivity(), tdLivros, this);
         Intent intent = new Intent(getActivity(), ListarLivrosService.class);
         getActivity().startService(intent);
 
@@ -115,22 +115,6 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
     }
 
 
-    //@Override
-    // public boolean onMenuItemClick(MenuItem item) {
-    //    switch (item.getItemId()) {
-    //        case R.id.item_AddWishList:
-    //            Toast.makeText(getActivity(), "Adicionado na WishList", Toast.LENGTH_SHORT).show();
-    //            return true;
-    //        case R.id.item_Visualizar:
-    //            Toast.makeText(getActivity(), "Visualizar Livro", Toast.LENGTH_SHORT).show();
-    //            Intent intent = new Intent(getContext(), VisualizarAnuncioActivity.class);
-    //            startActivity(intent);
-
-    //            return true;
-    //    }
-
-    //    return  true;
-    // }
 
 
     @Override
@@ -140,6 +124,16 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
 
         Log.i(TAG, "usuario:" + id);
         new addLivroWhishlist().execute(id);
+
+    }
+
+    @Override
+    public void OnCustomClick(View view, Usuario usuario) {
+
+    }
+
+    @Override
+    public void OnCustomClick(View view, Livro livro) {
 
     }
 
@@ -174,13 +168,6 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
         protected void onPostExecute(Livro s) {
             super.onPostExecute(s);
             EventBus.getDefault().post(s);
-
-
-
-          //Intent intent = new Intent(getActivity(), ListarLivrosWhishListService.class);
-           //getActivity().startService(intent);
-
-
 
         }
 

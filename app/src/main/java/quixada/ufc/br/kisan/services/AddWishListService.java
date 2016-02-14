@@ -67,7 +67,6 @@ public class AddWishListService extends Service {
                     Intent sendBack = new Intent("AtualizarPerfil");
                     sendBack.putExtra("result", result);
                     sendBack.putExtra("data", usuario);
-       //             LocalBroadcastManager.getInstance(AtualizarPerfilService.this).sendBroadcast(sendBack);
 
                 } catch (IOException e) {
                     Log.d(TAG, "Exception calling atualizar service", e);

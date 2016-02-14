@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.adapter.MeusLivrosAdapter;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.services.WebHelper;
@@ -38,9 +37,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
     private EditText edtGenero;
     private EditText edtAutor;
     private Button addLivro;
-    
-
-    private MeusLivrosAdapter meusLivrosAdapter;
 
     private Livro livro;
 
@@ -135,120 +131,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
 
     }
 
-/*
-    private class adiocionarLivro extends AsyncTask<String, Void, String> {
-
-        final WebHelper http = new WebHelper();
-        Livro novoLivro = null;
-        final Gson parser = new Gson();
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            enableViews(false);
-            try {
-
-                final String body = parser.toJson(livro, Livro.class);
-                final WebResult webResult = http.executeHTTP(url, "POST", body);
-                if (webResult.getHttpCode() == 200) {
-
-                    novoLivro = parser.fromJson(webResult.getHttpBody(), Livro.class);
-                }
-
-            } catch (IOException e) {
-                Log.d(TAG, "Exception calling add service", e);
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            enableViews(true);
-
-            edtDescricao.setText("");
-            edtTitulo.setText("");
-            edtGenero.setText("");
-            edtAutor.setText("");
-
-            Toast.makeText(AddAnuncioActivity.this, "Livro adicionado com sucesso!", Toast.LENGTH_SHORT).show();
-
-
-        }
-    }
-
-        public void callntentImgCam(View view) {
-
-            File file = new File(Environment.getExternalStorageDirectory(), "img.pmg");
-            Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-            startActivityForResult(intent, IMG_CAM);
-
-
-        }
-
-        public void callntentImgSDCard(View view) {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("img/");
-            startActivityForResult(intent, IMG_SDCARD);
-
-        }
-
-
-        private void enableViews(boolean status) {
-            edtTitulo.setEnabled(status);
-            edtAutor.setEnabled(status);
-            edtGenero.setEnabled(status);
-            edtDescricao.setEnabled(status);
-            addLivro.setEnabled(status);
-
-
-        }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-      File file = null;
-
-       if (data != null && requestCode == IMG_SDCARD && resultCode == RESULT_OK){
-
-           Uri img = data.getData();
-           String [] cols = {MediaStore.Images.Media.DATA};
-           Cursor cursor = getContentResolver().query(img, cols,null, null, null);
-           cursor.moveToFirst();
-
-           int indexCol = cursor.getColumnIndex(cols[0]);
-           String imgString = cursor.getString(indexCol);
-           cursor.close();
-
-           file = new File(imgString);
-           if(file != null){
-               livro.getFoto().setResizedBitmap(file, 50, 50);
-               livro.getFoto().setMimeFromImgPath(file.getPath());
-
-           }
-
-       }else if (requestCode == IMG_CAM && resultCode == RESULT_OK){
-
-           file = new File(Environment.getExternalStorageDirectory(),"img.png");
-           if(file != null){
-               livro.getFoto().setResizedBitmap(file, 50, 50);
-               livro.getFoto().setMimeFromImgPath(file.getPath());
-
-            }
-
-       }
-
-        if (livro.getFoto().getBitmap() != null){
-            imageView.setImageBitmap(livro.getFoto().getBitmap());
-
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-    */
 
 
 

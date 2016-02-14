@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="New Text"
-            android:id="@+id/autor" />
+            android:id="@+id/autor_wishlist" />
 
     </LinearLayout>
 
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Genêro:"
+            android:text="Gênero:"
             android:textStyle="bold"
             android:id="@+id/generoView" />
         <TextView
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="New Text"
-            android:id="@+id/genero" />
+            android:id="@+id/genero_wishlist" />
 
     </LinearLayout>
 
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="New Text"
-            android:id="@+id/sinopse" />
+            android:id="@+id/sinopse_wishlist" />
 
     </LinearLayout>
 
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="New Text"
-            android:id="@+id/proprietario" />
+            android:id="@+id/proprietario_wishlist" />
 
     </LinearLayout>
 
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="New Text"
-            android:id="@+id/localizacao" />
+            android:id="@+id/localizacao_wishlist" />
 
     </LinearLayout>
 

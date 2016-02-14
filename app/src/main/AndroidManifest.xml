@@ -71,14 +71,6 @@
             -->
         </activity>
         <activity
-            android:name=".activity.VisualizarAnuncioActivity"
-            android:label="@string/title_activity_visualizar_livro"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        </activity>
-        <activity
             android:name=".activity.VisualizarPerfilActivity"
             android:label="@string/title_activity_visualizar_perfil"
             android:theme="@style/AppTheme.NoActionBar">
@@ -103,37 +95,12 @@
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
         </activity>
         <activity
-            android:name=".activity.SignupActivity"
-            android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        </activity>
-        <activity
-            android:name=".activity.Visualizar_Localizacao_Activity"
-            android:label="@string/title_activity_visualizar__localizacao_"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        </activity>
-        <activity
             android:name=".activity.ConversasActivity"
             android:label="@string/title_activity_conversas"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        </activity>
-        <activity
-            android:name=".activity.EditAnuncioActivity"
-            android:label="@string/title_activity_editar"
-            android:theme="@style/AppTheme.NoActionBar">
-            >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="quixada.ufc.br.kisan.activity.VisualizarMeusAnunciosActivity" />
         </activity>
 
         <provider

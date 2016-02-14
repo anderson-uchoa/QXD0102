@@ -5,9 +5,6 @@
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true">
 
-
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,13 +23,15 @@
             android:layout_width="336dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+        android:orientation="vertical">
 
         <EditText android:id="@+id/input_name_perfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:hint="Nome" />
+
     </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout

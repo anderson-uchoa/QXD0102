@@ -9,13 +9,13 @@ import quixada.ufc.br.kisan.fragments.ListaAnunciosFragment;
 import quixada.ufc.br.kisan.fragments.WishListFragment;
 
 
-public class TabAdapter extends FragmentPagerAdapter {
+public class TabFragmentsAdapter extends FragmentPagerAdapter {
 
     private Context context;
     static final int QTD_TABS = 2;
     private static final String[] tabTitles= {"Anúncios","WishList"};
 
-    public TabAdapter(FragmentManager fm, Context context) {
+    public TabFragmentsAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }

@@ -38,7 +38,6 @@ public class PreProcessamentoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pre_processamento);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //application.setIp("10.0.2.218:8080");
 
 Log.i(TAG, "sdcsdvsdvsdvcasc:"+application.getIp());
 

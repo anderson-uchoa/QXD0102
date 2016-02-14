@@ -8,43 +8,37 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.fragments.ListaAnunciosFragment;
-import quixada.ufc.br.kisan.fragments.WishListFragment;
 import quixada.ufc.br.kisan.model.Livro;
 
 /**
  * Created by andersonuchoa on 07/02/16.
  */
-public class EpandableListWishAdapter extends BaseExpandableListAdapter {
-
-    private Context _context;
-    private ArrayList<Livro> _livros;
-    private boolean flagImage;
+public class ExpandableListWishAdapter extends BaseExpandableListAdapter {
+    private static final String TAG = "ExpandableListWishAdapter";
+    private Context context;
+    private ArrayList<Livro> livros;
     private OnCustomClickListener callBack;
 
 
-    public EpandableListWishAdapter(Context context,ArrayList<Livro> livros, OnCustomClickListener callBack) {
-        this._context = context;
-        this._livros = livros;
-        this.flagImage = true;
+    public ExpandableListWishAdapter(Context context, ArrayList<Livro> livros, OnCustomClickListener callBack) {
+        this.context = context;
+        this.livros = livros;
         this.callBack = callBack;
 
     }
 
 
     public void addNovoLivro(Livro livro){
-        _livros.add(livro);
+        livros.add(livro);
         notifyDataSetChanged();
     }
 
 
     @Override
     public Object getChild(int groupPosition, int childPosititon) {
-        return this._livros.get(groupPosition);
+        return this.livros.get(groupPosition);
     }
 
     @Override
@@ -59,39 +53,41 @@ public class EpandableListWishAdapter extends BaseExpandableListAdapter {
         final Livro child = (Livro) getChild(groupPosition, childPosition);
 
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            Log.i(TAG, "entrou");
+            LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_item_fragment_whislist, null);
         }
 
-        TextView autor = (TextView)convertView.findViewById(R.id.autor);
-        TextView genero = (TextView)convertView.findViewById(R.id.genero);
-        TextView sinopse = (TextView)convertView.findViewById(R.id.sinopse);
-        TextView proprietario = (TextView)convertView.findViewById(R.id.proprietario);
-        TextView localizacao = (TextView)convertView.findViewById(R.id.localizacao);
 
-        autor.setText("");
-        genero.setText("default");
+        TextView autor = (TextView)convertView.findViewById(R.id.autor_wishlist);
+        TextView genero = (TextView)convertView.findViewById(R.id.genero_wishlist);
+        TextView sinopse = (TextView)convertView.findViewById(R.id.sinopse_wishlist);
+        TextView proprietario = (TextView)convertView.findViewById(R.id.proprietario_wishlist);
+        TextView localizacao = (TextView)convertView.findViewById(R.id.localizacao_wishlist);
+
+
+        autor.setText(child.getAutor());
+        genero.setText(child.getGenero());
         sinopse.setText(child.getSinopse());
         proprietario.setText(child.getUsuario().getNome());
-        localizacao.setText("default");
+        localizacao.setText(child.getUsuario().getCidade());
 
         return convertView;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return 1;
+        return  1;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._livros.get(groupPosition);
+        return this.livros.get(groupPosition);
     }
 
     @Override
     public int getGroupCount() {
-        return this._livros.size();
+        return this.livros.size();
     }
 
     @Override
@@ -102,15 +98,13 @@ public class EpandableListWishAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(final int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        final Livro livro = _livros.get(groupPosition);
+        final Livro livro = livros.get(groupPosition);
 
         String headerTitle = livro.getTitulo();
-        //Integer capa = _livros.get(groupPosition).getImagem();
 
         Integer capa = R.drawable.images;
         if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group_fragment_whishlist, null);
         }
 
@@ -128,7 +122,7 @@ public class EpandableListWishAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View v) {
 
-                callBack.OnCustomClick(v, livro.getId());
+                callBack.OnCustomClick(v, livro.getUsuario());
             }
         });
 

@@ -3,8 +3,6 @@ package quixada.ufc.br.kisan.activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -21,10 +19,8 @@ import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 
-import org.greenrobot.eventbus.EventBus;
-
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.adapter.TabAdapter;
+import quixada.ufc.br.kisan.adapter.TabFragmentsAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ListView mDrawerList;
-    private TabAdapter mainTabAdapter;
+    private TabFragmentsAdapter mainTabFragmentsAdapter;
     private ArrayAdapter<String> mAdapter;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -56,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPagerTabs);
         viewPager.setOffscreenPageLimit(2);
 
-        mainTabAdapter = new TabAdapter(getSupportFragmentManager(), this.getBaseContext());
-        viewPager.setAdapter(mainTabAdapter);
+        mainTabFragmentsAdapter = new TabFragmentsAdapter(getSupportFragmentManager(), this.getBaseContext());
+        viewPager.setAdapter(mainTabFragmentsAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 

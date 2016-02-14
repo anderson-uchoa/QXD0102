@@ -13,10 +13,10 @@
     tools:showIn="@layout/activity_visualizar_meus_anuncios">
 
 
-    <ListView
+    <ExpandableListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listViewMeusAnuncios"
+        android:id="@+id/expandableViewMeusAnuncios"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
