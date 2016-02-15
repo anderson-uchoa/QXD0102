@@ -12,6 +12,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.activity.ConversasActivity;
 
 /**
  * Created by Joe on 5/28/2014.
@@ -55,6 +56,7 @@ public class GCMNotificationIntentService extends IntentService {
                         userListIntent.putExtra("USERLIST",userList);
                         sendBroadcast(userListIntent);
                     } else if("CHAT".equals(extras.get("SM"))){
+                        sendNotification("Nova mensagem");
                         Log.d(TAG, "onHandleIntent - CHAT ");
                         Intent chatIntent = new Intent("realm.ufc.br.testeander.chatmessage");
                         chatIntent.putExtra("CHATMESSAGE",extras.get("CHATMESSAGE").toString());
@@ -74,11 +76,11 @@ public class GCMNotificationIntentService extends IntentService {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, SignUpActivity.class), 0);
+                new Intent(this, ConversasActivity      .class), 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
                 this).setSmallIcon(R.drawable.gcm_cloud)
-                .setContentTitle("GCM XMPP Message")
+                .setContentTitle("Nova mensagem")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
                 .setContentText(msg);
 

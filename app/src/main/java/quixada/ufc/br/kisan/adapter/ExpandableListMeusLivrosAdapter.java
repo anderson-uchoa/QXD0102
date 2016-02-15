@@ -60,6 +60,17 @@ public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
         TextView autor = (TextView)convertView.findViewById(R.id.input_autor_livro);
         TextView genero = (TextView)convertView.findViewById(R.id.spinner_livro);
         TextView sinopse = (TextView)convertView.findViewById(R.id.input_descricao_livro);
+        ImageView imageViewLivro = (ImageView) convertView.findViewById(R.id.imagem_livro_add);
+
+        Picasso.with(context)
+                .load(url_imagem + child.getFoto())
+                .placeholder(R.drawable.ic_menu_camera)
+                .error(R.drawable.ic_menu_camera)
+                .into(imageViewLivro);
+
+
+
+
         Button btn_Atualizar = (Button) convertView.findViewById(R.id.btn_Atualizar_livro);
 
         titulo.setText(child.getTitulo());
@@ -133,7 +144,6 @@ public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
             public void onClick(View v) {
                 livros.remove(livros.get(groupPosition));
                 notifyDataSetChanged();
-
                 callBack.OnCustomClick(v, livro.getId());
             }
         });

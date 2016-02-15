@@ -8,21 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.ConversasAdapter;
+import quixada.ufc.br.kisan.application.CustomApplication;
+import quixada.ufc.br.kisan.dataBase.Conversa;
+import quixada.ufc.br.kisan.dataBase.MensagemRealm;
 
 public class ConversasActivity extends AppCompatActivity {
 
-
-    private String conversas[] = new String[]{"Forrest", "Emílio",
-            "Danilo"};
-
-    private Integer[] imgid = {
-            R.raw.forrest,
-            R.raw.emilio,
-            R.raw.danilo,
-
-    };
 
     private ListView lista;
 
@@ -34,18 +29,31 @@ public class ConversasActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        CustomApplication customApplication = (CustomApplication) getApplication();
 
 
+        MensagemRealm mensagemRealm = new MensagemRealm(this);
+        List<Conversa> conversas = mensagemRealm.buscar(customApplication.getUsuario().getId());
 
+        String [] nomes = new String[conversas.size()];
+        int i = 0;
+        for (Conversa con: conversas){
+            if(con.getIdUsuario1()==customApplication.getUsuario().getId()){
+                nomes[i] = con.getNome1();
+            }else{
+                nomes[i] = con.getNome2();
+            }
 
-        ConversasAdapter conversasAdapter = new ConversasAdapter(this, conversas, imgid);
+        }
+
+        ConversasAdapter conversasAdapter = new ConversasAdapter(this, nomes);
         lista = (ListView) findViewById(R.id.listView);
         lista.setAdapter(conversasAdapter);
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+                //startActivity(intent);
             }
         });
 

@@ -1,11 +1,13 @@
 package quixada.ufc.br.kisan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.chat.ChatActivity;
 import quixada.ufc.br.kisan.util.CaminhosWebService;
 import quixada.ufc.br.kisan.model.Livro;
 
@@ -70,6 +73,22 @@ public class ExpandableListWishAdapter extends BaseExpandableListAdapter {
         TextView sinopse = (TextView)convertView.findViewById(R.id.sinopse_wishlist);
         TextView proprietario = (TextView)convertView.findViewById(R.id.proprietario_wishlist);
         TextView localizacao = (TextView)convertView.findViewById(R.id.localizacao_wishlist);
+
+        ImageButton imageButtonComunicacao = (ImageButton) convertView.findViewById(R.id.iniciarComunicacaoWishlist);
+
+        imageButtonComunicacao.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("token", child.getUsuario().getTokenGCM());
+                intent.putExtra("idFacebook", child.getUsuario().getId_facebook());
+                intent.putExtra("nomeUsuario", child.getUsuario().getNome());
+                context.startActivity(intent);
+
+            }
+        });
 
 
         autor.setText(child.getAutor());

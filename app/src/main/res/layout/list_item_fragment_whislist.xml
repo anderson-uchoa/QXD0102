@@ -124,6 +124,6 @@
     <ImageButton
         android:layout_width="69dp"
         android:layout_height="58dp"
-        android:id="@+id/imageButton3"
+        android:id="@+id/iniciarComunicacaoWishlist"
         android:src="@drawable/ic_chat_black_24dp"/>
 </LinearLayout>

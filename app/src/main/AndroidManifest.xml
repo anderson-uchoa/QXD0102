@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="quixada.ufc.br.kisan">
 
-    <permission android:name="com.javapapers.android.gcm.chat.permission.C2D_MESSAGE" android:protectionLevel="signature"/>
-    <uses-permission android:name="com.javapapers.android.gcm.chat.permission.C2D_MESSAGE"/>
+    <uses-permission android:name=".chat.permission.C2D_MESSAGE"/>
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 
@@ -86,14 +85,6 @@
         <activity
             android:name=".activity.VisualizarMeusAnunciosActivity"
             android:label="@string/title_activity_visualizar_meus_anuncios"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="quixada.ufc.br.kisan.activity.MainActivity" />
-        </activity>
-        <activity
-            android:name=".activity.ChatActivity"
-            android:label="@string/title_activity_chat"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

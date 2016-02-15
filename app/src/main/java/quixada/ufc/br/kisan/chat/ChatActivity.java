@@ -41,14 +41,19 @@ public class ChatActivity extends Activity {
     Intent intent;
 
 	private static Random random;
-    private String toUserName;
+    private String token;
+    private String nomeUsuario;
+    private String idFacebook;
+
     MessageSender messageSender;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        toUserName = i.getStringExtra("TOUSER");
+        token = i.getStringExtra("token");
+        nomeUsuario = i.getStringExtra("nomeUsuario");
+        idFacebook = i.getStringExtra("idFacebook");
 		setContentView(R.layout.activity_chat);
 
         buttonSend = (Button) findViewById(R.id.buttonSend);
@@ -95,7 +100,9 @@ public class ChatActivity extends Activity {
         //sending gcm message to the paired device
         Bundle dataBundle = new Bundle();
         dataBundle.putString("ACTION", "CHAT");
-        dataBundle.putString("TOUSER", toUserName);
+        dataBundle.putString("TOUSER", token);
+        dataBundle.putString("IDFACE", idFacebook);
+        dataBundle.putString("NOMEUSER", nomeUsuario);
         dataBundle.putString("CHATMESSAGE", chatText.getText().toString());
         messageSender.sendMessage(dataBundle,gcm);
 

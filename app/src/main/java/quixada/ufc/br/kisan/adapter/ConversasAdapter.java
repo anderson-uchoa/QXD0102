@@ -8,7 +8,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.dataBase.Conversa;
 
 /**
  * Created by andersonuchoa on 18/12/15.
@@ -16,18 +19,16 @@ import quixada.ufc.br.kisan.R;
 public class ConversasAdapter extends ArrayAdapter<String> {
 
 
-
     private final Activity context;
-    private final String[] itemname;
-    private final Integer[] integers;
+    private List<Conversa> conversas;
+    private String[] nomes;
 
-    public ConversasAdapter(Activity context, String[] itemname, Integer[] integers) {
-        super(context, R.layout.fila_lista_conversas, itemname);
-        // TODO Auto-generated constructor stub
+    public ConversasAdapter(Activity context, String[] nomes)  {
+        super(context, R.layout.fila_lista_conversas, nomes);
 
         this.context=context;
-        this.itemname=itemname;
-        this.integers=integers;
+        this.nomes = nomes;
+
     }
 
     public View getView(int position,View view, ViewGroup parent){
@@ -38,8 +39,7 @@ public class ConversasAdapter extends ArrayAdapter<String> {
         TextView txtTitle = (TextView) rowView.findViewById(R.id.texto_principal);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
-        txtTitle.setText(itemname[position]);
-        imageView.setImageResource(integers[position]);
+        txtTitle.setText(nomes[position]);
 
 
         return rowView;
