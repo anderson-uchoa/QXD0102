@@ -49,7 +49,7 @@ public class ChatArrayAdapter extends ArrayAdapter {
         View row = convertView;
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(R.layout.activity_chat_singlemessage, parent, false);
+            row = inflater.inflate(R.layout.activity_chat_singlemessage2, parent, false);
         }
         singleMessageContainer = (LinearLayout) row.findViewById(R.id.singleMessageContainer);
         ChatMessage chatMessageObj = getItem(position);
