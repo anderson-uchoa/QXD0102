@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.Util.CaminhosWebService;
+import quixada.ufc.br.kisan.util.CaminhosWebService;
 import quixada.ufc.br.kisan.adapter.ExpandableListAnunciosAdapter;
 import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
 import quixada.ufc.br.kisan.application.CustomApplication;
@@ -66,8 +66,6 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
         id = usuario.getId();
 
         Log.i( TAG, usuario.getId().toString());
-
-
 
         if (tdLivros.size() <= 0 ){
            progressBar.setVisibility(view.GONE);

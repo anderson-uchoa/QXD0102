@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,8 +29,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.Util.CaminhosWebService;
-import quixada.ufc.br.kisan.Util.RealPathUtil;
+import quixada.ufc.br.kisan.util.CaminhosWebService;
+import quixada.ufc.br.kisan.util.RealPathUtil;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.services.WebHelper;
@@ -40,7 +41,7 @@ public class AddAnuncioActivity extends AppCompatActivity {
     private static final String TAG = "AddAnuncioActivity";
 
     String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros";
-    String urlfoto = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file";
+    String urlfoto = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file/";
 
     private EditText edtTitulo;
     private EditText edtDescricao;
@@ -52,7 +53,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
     private Livro livro;
 
     String caminho;
-    boolean capturouImagem = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,16 +77,19 @@ public class AddAnuncioActivity extends AppCompatActivity {
         livro.setUsuario(customApplication.getUsuario());
 
 
+
     addImagemLivro.setOnClickListener(new View.OnClickListener() {
 
-    @Override
-    public void onClick(View v) {
-           Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-           intent.setType("image/*");
-           startActivityForResult(intent,1);
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent, 1);
 
-    }
-});
+        }
+    });
+
+
 
         addLivro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,9 +106,9 @@ public class AddAnuncioActivity extends AppCompatActivity {
         });
     }
 
-   public void run(String caminho) {
 
-       final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+   public void run(String caminho) {
+   final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
             OkHttpClient client = new OkHttpClient();
             RequestBody requestBody = new MultipartBody.Builder()
@@ -123,6 +126,17 @@ public class AddAnuncioActivity extends AppCompatActivity {
 
            if (response.isSuccessful()){
                livro.setFoto(response.body().string());
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       Picasso.with(AddAnuncioActivity.this)
+                               .load(urlfoto + livro.getFoto())
+                               .placeholder(R.drawable.ic_menu_camera)
+                               .error(R.drawable.ic_menu_camera)
+                               .into(addImagemLivro);
+                   }
+               });
+
            }
 
        } catch (IOException e) {
@@ -135,9 +149,7 @@ public class AddAnuncioActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        capturouImagem = true;
         final Uri uri = data.getData();
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -168,9 +180,7 @@ public class AddAnuncioActivity extends AppCompatActivity {
                     }catch (NumberFormatException e) {
                         Log.d(TAG, "Erro conversao long", e);
                     }
-
                 }
-
 
             } catch (IOException e) {
                 Log.d(TAG, "Exception calling add service", e);

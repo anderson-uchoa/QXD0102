@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import quixada.ufc.br.kisan.Util.CaminhosWebService;
+import quixada.ufc.br.kisan.util.CaminhosWebService;
 
 import quixada.ufc.br.kisan.model.Usuario;
 

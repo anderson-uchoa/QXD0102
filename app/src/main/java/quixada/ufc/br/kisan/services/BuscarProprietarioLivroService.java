@@ -1,6 +1,5 @@
 package quixada.ufc.br.kisan.services;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -9,15 +8,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import quixada.ufc.br.kisan.Util.CaminhosWebService;
-import quixada.ufc.br.kisan.application.CustomApplication;
+import quixada.ufc.br.kisan.util.CaminhosWebService;
 import quixada.ufc.br.kisan.model.Livro;
-import quixada.ufc.br.kisan.model.Usuario;
 
 /**
  * Created by andersonuchoa on 13/02/16.

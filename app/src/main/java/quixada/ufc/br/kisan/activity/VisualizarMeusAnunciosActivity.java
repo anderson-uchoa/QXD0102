@@ -24,10 +24,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.Util.CaminhosWebService;
+import quixada.ufc.br.kisan.util.CaminhosWebService;
 import quixada.ufc.br.kisan.adapter.ExpandableListMeusLivrosAdapter;
 import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
-import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
 import quixada.ufc.br.kisan.services.VisualizarMeusLivrosService;

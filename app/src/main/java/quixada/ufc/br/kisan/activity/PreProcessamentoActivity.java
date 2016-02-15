@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import quixada.ufc.br.kisan.R;
-import quixada.ufc.br.kisan.Util.CaminhosWebService;
+import quixada.ufc.br.kisan.util.CaminhosWebService;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Usuario;
 

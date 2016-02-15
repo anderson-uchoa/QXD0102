@@ -17,7 +17,6 @@
   public class WebHelper {
 
 
-
       public static boolean isOnline(Context ctx) {
           ConnectivityManager manager = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
           NetworkInfo info = manager.getActiveNetworkInfo();
