@@ -12,10 +12,9 @@ public class Usuario implements Serializable {
 
 	}
 
-	public Usuario(Long id, Long id_facebook, String foto, String nome, String email, String cidade) {
+	public Usuario(Long id, Long id_facebook, String nome, String email, String cidade) {
 		this.id = id;
 		this.id_facebook = id_facebook;
-		this.foto = foto;
 		this.nome = nome;
 		this.email = email;
 		this.cidade = cidade;
@@ -26,15 +25,11 @@ public class Usuario implements Serializable {
 
 	private Long id_facebook;
 
-	private String foto;
-
 	private String nome;
 
 	private String email;
 
-
 	private String cidade;
-
 
 
 	public String getNome() {
@@ -60,16 +55,6 @@ public class Usuario implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-
 	public String getCidade() {
 		return cidade;
 	}
@@ -77,7 +62,6 @@ public class Usuario implements Serializable {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-
 
 	public Long getId_facebook() {
 		return id_facebook;
@@ -92,7 +76,6 @@ public class Usuario implements Serializable {
 		return "Usuario{" +
 				"id=" + id +
 				", id_facebook=" + id_facebook +
-				", foto='" + foto + '\'' +
 				", nome='" + nome + '\'' +
 				", email='" + email + '\'' +
 				", cidade='" + cidade + '\'' +

@@ -1,6 +1,6 @@
 package quixada.ufc.br.kisan.services;
 
-import android.app.Activity;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -33,7 +33,6 @@ public class VisualizarMeusLivrosService extends Service {
         return null;
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,7 +54,7 @@ public class VisualizarMeusLivrosService extends Service {
                 int result = -1;
                 final WebHelper http = new WebHelper();
                 ArrayList<Livro> livros = null;
-                CustomApplication customApplication = new CustomApplication();
+
                 String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/usuario/livros/";
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.Toast;
 
 import quixada.ufc.br.kisan.fragments.ListaAnunciosFragment;
 import quixada.ufc.br.kisan.fragments.WishListFragment;

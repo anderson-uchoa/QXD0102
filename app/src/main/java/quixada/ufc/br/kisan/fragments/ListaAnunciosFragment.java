@@ -61,7 +61,7 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView_wishlist);
 
-        CustomApplication  application = (CustomApplication) getActivity().getApplication();
+        CustomApplication application = (CustomApplication) getActivity().getApplication();
         usuario = application.getUsuario();
         id = usuario.getId();
 

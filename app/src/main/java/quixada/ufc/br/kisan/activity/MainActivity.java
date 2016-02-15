@@ -2,6 +2,7 @@ package quixada.ufc.br.kisan.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,23 +10,28 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
+import com.squareup.picasso.Picasso;
 
 import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.adapter.TabFragmentsAdapter;
+import quixada.ufc.br.kisan.application.CustomApplication;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
 
     private ViewPager viewPager;
+
     private TabLayout tabLayout;
     private ListView mDrawerList;
     private TabFragmentsAdapter mainTabFragmentsAdapter;
@@ -34,20 +40,31 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private String mActivityTitle;
 
+    private ImageView imagemPerfil;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        CustomApplication customApplication = (CustomApplication) getApplication();
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mDrawerList = (ListView)findViewById(R.id.navList);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mActivityTitle = getTitle().toString();
 
+        imagemPerfil = (ImageView) findViewById(R.id.imageViewFotoPerfil);
+
+        Picasso.with(this)
+                .load("http://graph.facebook.com/"+customApplication.getUsuario().getId_facebook()+"/picture?type=square")
+                .placeholder(R.drawable.images)
+                .error(R.drawable.ic_play_light)
+                .into(imagemPerfil);
+
+        mActivityTitle = getTitle().toString();
 
         viewPager = (ViewPager) findViewById(R.id.viewPagerTabs);
         viewPager.setOffscreenPageLimit(2);
@@ -60,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
         int corUnselected = getResources().getColor(R.color.colorPrimaryDark);
         int corSelected = getResources().getColor(R.color.white);
         tabLayout.setTabTextColors(corUnselected, corSelected);
-        //mudar cor de tab selecionada
-        //tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
         tabLayout.setupWithViewPager(viewPager);
 
         addDrawerItems();
@@ -74,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void addDrawerItems() {
 
-        String[] osArray = {"Aqui foto usuario","Meu Perfil", "Meus Anúncios" ,"Conversas", "Logout"};
+        String[] osArray = {"Meu Perfil", "Meus Anúncios" ,"Conversas", "Logout"};
         mAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, osArray);
 
         mDrawerList.setAdapter(mAdapter);
@@ -87,25 +102,23 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = null;
 
                 switch (position){
-                    case 1:
+                    case 0:
                         intent = new Intent(getApplicationContext(), VisualizarPerfilActivity.class);
                         startActivity(intent);
-                        //    intent = new Intent(getApplicationContext(), VisualizarPerfilActivity.class);
-                    //    startActivity(intent);
                         Toast.makeText(MainActivity.this, "Perfil!", Toast.LENGTH_SHORT).show();
                         break;
-                    case 2:
+                    case 1:
                         intent = new Intent(getApplicationContext(), VisualizarMeusAnunciosActivity.class);
                         startActivity(intent);
                      //   Toast.makeText(MainActivity.this, "Meus Anuncios!", Toast.LENGTH_SHORT).show();
 
                         break;
-                    case 3:
+                    case 2:
                         intent = new Intent(getApplicationContext(), ConversasActivity.class);
                         startActivity(intent);
                         Toast.makeText(MainActivity.this, "Conversas!", Toast.LENGTH_SHORT).show();
                         break;
-                    case 4:
+                    case 3:
                         LoginManager.getInstance().logOut();
                         intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);

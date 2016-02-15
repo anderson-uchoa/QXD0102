@@ -22,7 +22,7 @@ import quixada.ufc.br.kisan.R;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Usuario;
 import quixada.ufc.br.kisan.services.AtualizarPerfilService;
-import quixada.ufc.br.kisan.services.RestServiceUsuario;
+
 
 public class VisualizarPerfilActivity extends AppCompatActivity {
 

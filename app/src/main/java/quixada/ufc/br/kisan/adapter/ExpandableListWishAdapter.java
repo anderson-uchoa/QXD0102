@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.model.Livro;
 
 /**
@@ -17,6 +21,8 @@ import quixada.ufc.br.kisan.model.Livro;
  */
 public class ExpandableListWishAdapter extends BaseExpandableListAdapter {
     private static final String TAG = "ExpandableListWishAdapter";
+    String url_imagem = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file/";
+
     private Context context;
     private ArrayList<Livro> livros;
     private OnCustomClickListener callBack;
@@ -102,7 +108,7 @@ public class ExpandableListWishAdapter extends BaseExpandableListAdapter {
 
         String headerTitle = livro.getTitulo();
 
-        Integer capa = R.drawable.images;
+
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group_fragment_whishlist, null);
@@ -114,7 +120,11 @@ public class ExpandableListWishAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.capa);
 
         lblListHeader.setText(headerTitle);
-        imagem.setImageResource(capa);
+        Picasso.with(context)
+                .load(url_imagem+livro.getFoto())
+                .placeholder(R.drawable.images)
+                .error(R.drawable.images)
+                .into(imagem);
 
         final ImageView visualizar_localicacao = (ImageView) convertView.findViewById(R.id.visualizarLocalicacao);
 

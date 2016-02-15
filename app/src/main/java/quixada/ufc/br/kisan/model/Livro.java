@@ -20,8 +20,6 @@ public class Livro implements Serializable {
 
     private String sinopse;
 
-    private String numeroPaginas;
-
     private Usuario usuario;
 
     private String  autor;
@@ -54,14 +52,6 @@ public class Livro implements Serializable {
 
     public void setSinopse(String sinopse) {
         this.sinopse = sinopse;
-    }
-
-    public String getNumeroPaginas() {
-        return numeroPaginas;
-    }
-
-    public void setNumeroPaginas(String numeroPaginas) {
-        this.numeroPaginas = numeroPaginas;
     }
 
     public Usuario getUsuario() {
@@ -104,7 +94,6 @@ public class Livro implements Serializable {
                 ", foto='" + foto + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", sinopse='" + sinopse + '\'' +
-                ", numeroPaginas='" + numeroPaginas + '\'' +
                 ", usuario=" + usuario +
                 ", autor='" + autor + '\'' +
                 ", genero='" + genero + '\'' +

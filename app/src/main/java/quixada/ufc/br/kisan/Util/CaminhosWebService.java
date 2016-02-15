@@ -5,7 +5,7 @@ package quixada.ufc.br.kisan.Util;
  */
 public class CaminhosWebService {
 
-    public static final String IP = "192.168.1.37:8080";
+    public static final String IP = "192.168.0.103:8080";
 
 
 }

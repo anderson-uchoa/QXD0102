@@ -5,7 +5,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import com.google.gson.Gson;
 import java.io.IOException;
 
 import quixada.ufc.br.kisan.Util.CaminhosWebService;
-import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Usuario;
 
 /**

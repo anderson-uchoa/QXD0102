@@ -101,8 +101,6 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity implements
                     } else {
                         Toast.makeText(VisualizarMeusAnunciosActivity.this, "Sua lista de livros!", Toast.LENGTH_SHORT).show();
                     }
-
-
  }
             }
 

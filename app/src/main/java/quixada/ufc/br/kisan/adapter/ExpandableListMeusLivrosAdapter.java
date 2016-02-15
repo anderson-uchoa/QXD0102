@@ -23,7 +23,7 @@ import quixada.ufc.br.kisan.model.Livro;
  */
 public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
 
-    String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros";
+    String url_imagem = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file/";
 
     private Context context;
     private ArrayList<Livro> livros;
@@ -108,7 +108,6 @@ public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
         String headerTitle = livro.getTitulo();
 
 
-        Integer capa = R.drawable.images;
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -122,7 +121,7 @@ public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
 
         lblListHeader.setText(headerTitle);
         Picasso.with(context)
-                .load("http://"+CaminhosWebService.IP+"/Users/andersonuchoa/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/KisanSERVER/resources/upload/"+livro.getFoto())
+                .load(url_imagem+livro.getFoto())
                 .placeholder(R.drawable.images)
                 .error(R.drawable.images)
                 .into(imagem);

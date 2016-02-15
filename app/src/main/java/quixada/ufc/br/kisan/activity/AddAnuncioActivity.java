@@ -1,12 +1,10 @@
 package quixada.ufc.br.kisan.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,10 +17,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,12 +37,11 @@ import quixada.ufc.br.kisan.services.WebResult;
 
 public class AddAnuncioActivity extends AppCompatActivity {
 
+    private static final String TAG = "AddAnuncioActivity";
 
     String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros";
     String urlfoto = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file";
-    private static final String TAG = "AddAnuncioActivity";
 
-    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
     private EditText edtTitulo;
     private EditText edtDescricao;
     private EditText edtGenero;
@@ -56,9 +49,8 @@ public class AddAnuncioActivity extends AppCompatActivity {
     private Button addLivro;
     private ImageView addImagemLivro;
 
-
-
     private Livro livro;
+
     String caminho;
     boolean capturouImagem = true;
 
@@ -69,8 +61,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
 
         edtTitulo = (EditText) findViewById(R.id.input_titulo_livro);
@@ -95,7 +85,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
            intent.setType("image/*");
            startActivityForResult(intent,1);
 
-
     }
 });
 
@@ -114,14 +103,12 @@ public class AddAnuncioActivity extends AppCompatActivity {
         });
     }
 
-
-
    public void run(String caminho) {
 
        final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
             OkHttpClient client = new OkHttpClient();
-       RequestBody requestBody = new MultipartBody.Builder()
+            RequestBody requestBody = new MultipartBody.Builder()
                    .setType(MultipartBody.FORM)
                .addFormDataPart("file", "imagem.png", RequestBody.create(MEDIA_TYPE_PNG, new File(caminho))).build();
 
@@ -142,7 +129,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
            e.printStackTrace();
        }
 
-
    }
 
     @Override
@@ -162,22 +148,6 @@ public class AddAnuncioActivity extends AppCompatActivity {
         }).start();
 
     }
-
-
-
-
-
-    public String getRealPathFromURI(Uri uri) {
-        String[] projection = { MediaStore.Images.Media.DATA };
-        @SuppressWarnings("deprecation")
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        int column_index = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    }
-
-
 
 
     private class adiocionarLivro extends AsyncTask<String, Void, String> {

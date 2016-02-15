@@ -15,11 +15,14 @@ import java.util.ArrayList;
 
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.model.Livro;
 
 
 public class ExpandableListAnunciosAdapter extends BaseExpandableListAdapter {
     private static final String TAG = "ExpandableListAnunciosAdapter";
+    String url_imagem = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file/";
+
     private Context context;
     private ArrayList<Livro> livros;
     private boolean flagImage;
@@ -98,7 +101,6 @@ public class ExpandableListAnunciosAdapter extends BaseExpandableListAdapter {
         String headerTitle = livro.getTitulo();
 
 
-        Integer capa = R.drawable.images;
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_group_fragment_anuncios, null);
@@ -108,11 +110,8 @@ public class ExpandableListAnunciosAdapter extends BaseExpandableListAdapter {
         ImageView imagem = (ImageView) convertView.findViewById(R.id.capa);
 
         lblListHeader.setText(headerTitle);
-        imagem.setImageResource(capa);
-
-
         Picasso.with(context)
-                .load("http://reactionface.net/reactionface/images/original/170.jpg")
+                .load(url_imagem+livro.getFoto())
                 .placeholder(R.drawable.images)
                 .error(R.drawable.images)
                 .into(imagem);

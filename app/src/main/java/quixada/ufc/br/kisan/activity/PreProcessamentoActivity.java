@@ -59,7 +59,7 @@ public class PreProcessamentoActivity extends AppCompatActivity {
                             usuario1.setCidade(object.getJSONObject("location").getString("name"));
                             usuario1.setNome(object.getString("name"));
                             usuario1.setEmail(object.getString("email"));
-                            CustomApplication customApplication = (CustomApplication) getApplicationContext();
+                            CustomApplication customApplication = (CustomApplication) getApplication();
                             customApplication.setUsuario(usuario1);
 
                             Log.i(TAG, object.toString());
@@ -109,7 +109,7 @@ public class PreProcessamentoActivity extends AppCompatActivity {
                     if (usuario == null){
                         cadastrarUsuario();
                     }else{
-                        CustomApplication customApplication = (CustomApplication) getApplicationContext();
+                        CustomApplication customApplication = (CustomApplication) getApplication();
                         customApplication.setUsuario(usuario);
                     }
 
@@ -145,7 +145,7 @@ public class PreProcessamentoActivity extends AppCompatActivity {
                     Log.i("teste", novoUsuario.toString());
                     usuario1.setId(novoUsuario.getId());
 
-                    CustomApplication customApplication =(CustomApplication) getApplicationContext();
+                    CustomApplication customApplication =(CustomApplication) getApplication();
                     customApplication.setUsuario(usuario1);
 
                 }
