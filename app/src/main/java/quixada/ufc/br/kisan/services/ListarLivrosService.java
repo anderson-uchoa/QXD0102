@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
@@ -44,8 +45,8 @@ public class ListarLivrosService  extends Service {
                 int result = -1;
                 final WebHelper http = new WebHelper();
                 ArrayList<Livro> livros = null;
-                CustomApplication application = new CustomApplication();
-                String url = "http://"+application.getIp()+"/KisanSERVER/livros";
+
+                String url = "http://"+CaminhosWebService.IP+"/KisanSERVER/livros";
 
 
                 try {

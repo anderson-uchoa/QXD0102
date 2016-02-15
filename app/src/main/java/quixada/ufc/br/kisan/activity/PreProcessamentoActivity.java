@@ -18,9 +18,10 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Usuario;
-;
+
 import quixada.ufc.br.kisan.services.WebHelper;
 import quixada.ufc.br.kisan.services.WebResult;
 
@@ -28,8 +29,7 @@ public class PreProcessamentoActivity extends AppCompatActivity {
 
     private static final String TAG = "PreProcessamentoActivity";
     private Usuario usuario1;
-    private CustomApplication application = new CustomApplication();
-    String url = "http://"+application.getIp()+"/KisanSERVER/usuario/buscarIdFacebook/";
+    String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/usuario/buscarIdFacebook/";
 
 
     @Override
@@ -39,7 +39,6 @@ public class PreProcessamentoActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-Log.i(TAG, "sdcsdvsdvsdvcasc:"+application.getIp());
 
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -55,11 +54,11 @@ Log.i(TAG, "sdcsdvsdvsdvcasc:"+application.getIp());
 
                         try {
 
+
                             usuario1.setId_facebook(object.getLong("id"));
                             usuario1.setCidade(object.getJSONObject("location").getString("name"));
                             usuario1.setNome(object.getString("name"));
                             usuario1.setEmail(object.getString("email"));
-
                             CustomApplication customApplication = (CustomApplication) getApplicationContext();
                             customApplication.setUsuario(usuario1);
 
@@ -72,7 +71,6 @@ Log.i(TAG, "sdcsdvsdvsdvcasc:"+application.getIp());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
 
                     }
                 });
@@ -132,7 +130,7 @@ Log.i(TAG, "sdcsdvsdvsdvcasc:"+application.getIp());
             Usuario novoUsuario = null;
 
 
-            final String url = "http://"+application.getIp()+"/KisanSERVER/usuario";
+            final String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/usuario";
             final Gson parser = new Gson();
 
             try {

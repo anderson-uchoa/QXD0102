@@ -91,12 +91,13 @@ public class WishListFragment extends Fragment implements OnCustomClickListener 
 
                             for (Livro livro : livros) {
                                 tdLivros.add(livro);
+
                                 expListView.setAdapter(listAdapter);
                             }
 
 
                             if (livros == null) {
-                                Toast.makeText(getActivity(), "Você não possui livros em sua lista de desejos !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Você não possui livros em sua lista de desejos!", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 Toast.makeText(getActivity(), "Seus livros desejados", Toast.LENGTH_SHORT).show();

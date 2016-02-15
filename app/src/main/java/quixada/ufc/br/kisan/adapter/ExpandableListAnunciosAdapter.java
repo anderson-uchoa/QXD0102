@@ -9,6 +9,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 
@@ -95,6 +97,7 @@ public class ExpandableListAnunciosAdapter extends BaseExpandableListAdapter {
         final Livro livro = livros.get(groupPosition);
         String headerTitle = livro.getTitulo();
 
+
         Integer capa = R.drawable.images;
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -106,6 +109,14 @@ public class ExpandableListAnunciosAdapter extends BaseExpandableListAdapter {
 
         lblListHeader.setText(headerTitle);
         imagem.setImageResource(capa);
+
+
+        Picasso.with(context)
+                .load("http://reactionface.net/reactionface/images/original/170.jpg")
+                .placeholder(R.drawable.images)
+                .error(R.drawable.images)
+                .into(imagem);
+
 
         final ImageView favorite = (ImageView) convertView.findViewById(R.id.favoriteView);
 

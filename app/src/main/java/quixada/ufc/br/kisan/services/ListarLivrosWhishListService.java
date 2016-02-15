@@ -13,6 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
@@ -22,7 +23,7 @@ import quixada.ufc.br.kisan.model.Usuario;
  */
 public class ListarLivrosWhishListService extends Service {
     private static final String TAG = "ListarLivrosWhishListService";
-    CustomApplication customApplication;
+
 
     @Override
     public void onCreate() {
@@ -37,7 +38,7 @@ public class ListarLivrosWhishListService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        customApplication = (CustomApplication) getApplicationContext();
+        CustomApplication customApplication = (CustomApplication) getApplication();
 
         final Usuario usuario = customApplication.getUsuario();
 
@@ -49,7 +50,7 @@ public class ListarLivrosWhishListService extends Service {
                 final WebHelper http = new WebHelper();
                 ArrayList<Livro> livros = null;
                 CustomApplication application = new CustomApplication();
-                String url = "http://"+application.getIp()+"/KisanSERVER/livros/livrosUsuarioWishList/";
+                String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros/livrosUsuarioWishList/";
 
                 String url_m = url + usuario.getId();
 

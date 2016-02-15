@@ -14,7 +14,7 @@ public class Livro implements Serializable {
 
     private Long id;
 
-    private byte[] foto;
+    private String foto;
 
     private String titulo;
 
@@ -88,11 +88,12 @@ public class Livro implements Serializable {
         this.genero = genero;
     }
 
-    public byte[] getFoto() {
+
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
@@ -100,7 +101,7 @@ public class Livro implements Serializable {
     public String toString() {
         return "Livro{" +
                 "id=" + id +
-                ", foto=" + Arrays.toString(foto) +
+                ", foto='" + foto + '\'' +
                 ", titulo='" + titulo + '\'' +
                 ", sinopse='" + sinopse + '\'' +
                 ", numeroPaginas='" + numeroPaginas + '\'' +

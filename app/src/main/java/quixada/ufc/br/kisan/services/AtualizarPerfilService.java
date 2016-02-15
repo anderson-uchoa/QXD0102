@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Usuario;
 
@@ -20,7 +21,7 @@ import quixada.ufc.br.kisan.model.Usuario;
  */
 public class AtualizarPerfilService extends Service{
     private static final String TAG = "AtualizarPerfilService";
-    private CustomApplication application;
+
 
 
     @Nullable
@@ -51,8 +52,8 @@ public class AtualizarPerfilService extends Service{
                    int result = -1;
                    Usuario results = null;
                    final Gson parser = new Gson();
-                   application = new CustomApplication();
-                   final String url = "http://"+application.getIp()+"/KisanSERVER/usuario";
+
+                   final String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/usuario";
 
                    try {
                        final String body = parser.toJson(usuario, Usuario.class);

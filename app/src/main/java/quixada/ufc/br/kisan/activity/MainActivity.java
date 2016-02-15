@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addDrawerItems() {
 
-        String[] osArray = {"Aqui foto usuario","Meu Perfil", "Meus Anúncios" ,"Conversas", "Logout"," Mapa"};
+        String[] osArray = {"Aqui foto usuario","Meu Perfil", "Meus Anúncios" ,"Conversas", "Logout"};
         mAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, osArray);
 
         mDrawerList.setAdapter(mAdapter);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (position){
                     case 1:
                         intent = new Intent(getApplicationContext(), VisualizarPerfilActivity.class);
-                           startActivity(intent);
+                        startActivity(intent);
                         //    intent = new Intent(getApplicationContext(), VisualizarPerfilActivity.class);
                     //    startActivity(intent);
                         Toast.makeText(MainActivity.this, "Perfil!", Toast.LENGTH_SHORT).show();
@@ -106,19 +106,11 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Conversas!", Toast.LENGTH_SHORT).show();
                         break;
                     case 4:
-
                         LoginManager.getInstance().logOut();
                         intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
                         finish();
                         Toast.makeText(MainActivity.this, "Logout!", Toast.LENGTH_SHORT).show();
-
-                        break;
-                    case 5:
-
-                        intent = new Intent(getApplicationContext(), MapsActivity.class);
-                        startActivity(intent);
-                        Toast.makeText(MainActivity.this, "Maps!", Toast.LENGTH_SHORT).show();
                     default:
                 }
 

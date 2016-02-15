@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.model.Usuario;
@@ -22,7 +23,7 @@ import quixada.ufc.br.kisan.model.Usuario;
  * Created by andersonuchoa on 27/01/16.
  */
 public class VisualizarMeusLivrosService extends Service {
-    CustomApplication customApplication;
+
     private static final String TAG = "VisualizarMeusLivrosService";
 
 
@@ -43,7 +44,7 @@ public class VisualizarMeusLivrosService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
-        customApplication = (CustomApplication) getApplicationContext();
+        CustomApplication  customApplication = (CustomApplication) getApplicationContext();
 
         final Usuario usuario = customApplication.getUsuario();
 
@@ -55,7 +56,7 @@ public class VisualizarMeusLivrosService extends Service {
                 final WebHelper http = new WebHelper();
                 ArrayList<Livro> livros = null;
                 CustomApplication customApplication = new CustomApplication();
-                String url = "http://"+customApplication.getIp()+"/KisanSERVER/usuario/livros/";
+                String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/usuario/livros/";
 
 
                 String url_m = url + usuario.getId();

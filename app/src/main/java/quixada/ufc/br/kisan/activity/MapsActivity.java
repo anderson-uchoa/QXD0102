@@ -33,19 +33,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     CustomApplication customApplication;
     Usuario usuario = null;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-
         customApplication = (CustomApplication) this.getApplicationContext();
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -71,6 +67,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(cidade).title("Este local é " + usuario.getCidade()));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(cidade, 15));
 
-
     }
+
 }

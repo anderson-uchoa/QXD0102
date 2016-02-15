@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.adapter.ExpandableListMeusLivrosAdapter;
 import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
 import quixada.ufc.br.kisan.application.CustomApplication;
@@ -40,8 +41,8 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity implements
     private ArrayList<Livro> meusLivros = new ArrayList<Livro>();
     private ExpandableListMeusLivrosAdapter meusLivrosAdapter;
     private ExpandableListView expandableListView;
-    CustomApplication customApplication = new CustomApplication();;
-    String url = "http://"+customApplication.getIp()+"/KisanSERVER/livros/";
+
+    String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros/";
 
     private BroadcastReceiver broadcastReceiver;
 
@@ -53,7 +54,7 @@ public class VisualizarMeusAnunciosActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        customApplication = (CustomApplication) getApplicationContext();
+
 
 
         expandableListView = (ExpandableListView) findViewById(R.id.expandableViewMeusAnuncios);

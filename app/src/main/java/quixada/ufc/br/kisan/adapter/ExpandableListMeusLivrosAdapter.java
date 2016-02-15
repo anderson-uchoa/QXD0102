@@ -9,15 +9,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
+import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 
 /**
  * Created by andersonuchoa on 13/02/16.
  */
 public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
+
+    String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros";
 
     private Context context;
     private ArrayList<Livro> livros;
@@ -115,7 +121,12 @@ public class ExpandableListMeusLivrosAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.capa);
 
         lblListHeader.setText(headerTitle);
-        imagem.setImageResource(capa);
+        Picasso.with(context)
+                .load("http://"+CaminhosWebService.IP+"/Users/andersonuchoa/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/KisanSERVER/resources/upload/"+livro.getFoto())
+                .placeholder(R.drawable.images)
+                .error(R.drawable.images)
+                .into(imagem);
+
 
         final ImageView deletar = (ImageView) convertView.findViewById(R.id.deletarView);
 

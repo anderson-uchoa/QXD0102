@@ -7,38 +7,34 @@ import java.util.List;
 
 public class Usuario implements Serializable {
 
+
 	public Usuario() {
+
 	}
 
-	public Usuario(Long id, Long id_facebook, Byte[] foto, String nome, String email, String endereco, String cidade, List<Livro> livros, List<Livro> livrosDesejados) {
+	public Usuario(Long id, Long id_facebook, String foto, String nome, String email, String cidade) {
 		this.id = id;
 		this.id_facebook = id_facebook;
 		this.foto = foto;
 		this.nome = nome;
 		this.email = email;
-		this.endereco = endereco;
 		this.cidade = cidade;
-		this.livros = livros;
-		this.livrosDesejados = livrosDesejados;
+
 	}
 
 	private Long id;
 
 	private Long id_facebook;
 
-	private Byte[ ] foto;
+	private String foto;
 
 	private String nome;
 
 	private String email;
 
-	private String endereco;
 
 	private String cidade;
 
-	private List<Livro> livros;
-
-	private List<Livro> livrosDesejados;
 
 
 	public String getNome() {
@@ -65,21 +61,14 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public Byte[] getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(Byte[] foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
 	}
 
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
 
 	public String getCidade() {
 		return cidade;
@@ -89,22 +78,6 @@ public class Usuario implements Serializable {
 		this.cidade = cidade;
 	}
 
-	public List<Livro> getLivros() {
-		return livros;
-	}
-
-
-	public void setLivros(List<Livro> livros) {
-		this.livros = livros;
-	}
-
-	public List<Livro> getLivrosDesejados() {
-		return livrosDesejados;
-	}
-
-	public void setLivrosDesejados(List<Livro> livrosDesejados) {
-		this.livrosDesejados = livrosDesejados;
-	}
 
 	public Long getId_facebook() {
 		return id_facebook;
@@ -114,19 +87,15 @@ public class Usuario implements Serializable {
 		this.id_facebook = id_facebook;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Usuario{" +
 				"id=" + id +
 				", id_facebook=" + id_facebook +
-				", foto=" + Arrays.toString(foto) +
+				", foto='" + foto + '\'' +
 				", nome='" + nome + '\'' +
 				", email='" + email + '\'' +
-				", endereco='" + endereco + '\'' +
 				", cidade='" + cidade + '\'' +
-				", livros=" + livros +
-				", livrosDesejados=" + livrosDesejados +
 				'}';
 	}
 }

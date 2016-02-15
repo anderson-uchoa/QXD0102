@@ -1,8 +1,12 @@
 package quixada.ufc.br.kisan.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,15 +15,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
+import quixada.ufc.br.kisan.Util.RealPathUtil;
 import quixada.ufc.br.kisan.application.CustomApplication;
 import quixada.ufc.br.kisan.model.Livro;
 import quixada.ufc.br.kisan.services.WebHelper;
@@ -27,19 +43,24 @@ import quixada.ufc.br.kisan.services.WebResult;
 
 public class AddAnuncioActivity extends AppCompatActivity {
 
-    private CustomApplication application = new CustomApplication();
-    String url = "http://"+application.getIp()+"/KisanSERVER/livros";
+
+    String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros";
+    String urlfoto = "http://"+ CaminhosWebService.IP+"/KisanSERVER/file";
     private static final String TAG = "AddAnuncioActivity";
 
-
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
     private EditText edtTitulo;
     private EditText edtDescricao;
     private EditText edtGenero;
     private EditText edtAutor;
     private Button addLivro;
+    private ImageView addImagemLivro;
+
+
 
     private Livro livro;
-
+    String caminho;
+    boolean capturouImagem = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +71,33 @@ public class AddAnuncioActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+
+
         edtTitulo = (EditText) findViewById(R.id.input_titulo_livro);
         edtDescricao = (EditText) findViewById(R.id.input_descricao_livro);
         addLivro = (Button) findViewById(R.id.btn_Adicionar_livro);
         edtAutor = (EditText) findViewById(R.id.input_autor_livro);
         edtGenero =  (EditText) findViewById(R.id.spinner_livro);
+        addImagemLivro = (ImageView) findViewById(R.id.imagem_livro_add);
 
         livro = new Livro();
 
 
-        CustomApplication customApplication = (CustomApplication) getApplicationContext();
+        CustomApplication customApplication = (CustomApplication) getApplication();
         livro.setUsuario(customApplication.getUsuario());
 
 
+    addImagemLivro.setOnClickListener(new View.OnClickListener() {
+
+    @Override
+    public void onClick(View v) {
+           Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+           intent.setType("image/*");
+           startActivityForResult(intent,1);
+
+
+    }
+});
 
         addLivro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,16 +109,81 @@ public class AddAnuncioActivity extends AppCompatActivity {
                 livro.setAutor(edtAutor.getText().toString());
 
                 new adiocionarLivro().execute(url);
+
             }
         });
+    }
 
 
-        }
+
+   public void run(String caminho) {
+
+       final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+
+            OkHttpClient client = new OkHttpClient();
+       RequestBody requestBody = new MultipartBody.Builder()
+                   .setType(MultipartBody.FORM)
+               .addFormDataPart("file", "imagem.png", RequestBody.create(MEDIA_TYPE_PNG, new File(caminho))).build();
+
+       Request request = new Request.Builder()
+               .url(urlfoto)
+               .post(requestBody)
+               .build();
+
+       Response response = null;
+       try {
+           response = client.newCall(request).execute();
+
+           if (response.isSuccessful()){
+               livro.setFoto(response.body().string());
+           }
+
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+
+   }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        capturouImagem = true;
+        final Uri uri = data.getData();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                caminho = RealPathUtil.getPath(getApplicationContext(),uri);
+                Log.i(TAG, caminho);
+                AddAnuncioActivity.this.run(caminho);
+            }
+        }).start();
+
+    }
+
+
+
+
+
+    public String getRealPathFromURI(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        @SuppressWarnings("deprecation")
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+
+
 
     private class adiocionarLivro extends AsyncTask<String, Void, String> {
 
         final WebHelper http = new WebHelper();
-        Livro novoLivro = null;
+        Long id  = null;
         final Gson parser = new Gson();
 
         @Override
@@ -93,8 +193,12 @@ public class AddAnuncioActivity extends AppCompatActivity {
                 final String body = parser.toJson(livro, Livro.class);
                 final WebResult webResult = http.executeHTTP(url, "POST", body);
                 if(webResult.getHttpCode() == 200) {
+                    try {
+                        id = Long.parseLong(webResult.getHttpBody());
+                    }catch (NumberFormatException e) {
+                        Log.d(TAG, "Erro conversao long", e);
+                    }
 
-                 novoLivro = parser.fromJson(webResult.getHttpBody(), Livro.class);
                 }
 
 
@@ -115,6 +219,7 @@ public class AddAnuncioActivity extends AppCompatActivity {
             edtAutor.setText("");
 
             Intent intent = new Intent();
+            livro.setId(id);
             intent.putExtra("livro", livro);
 
             AddAnuncioActivity.this.setResult(1, intent);
@@ -123,13 +228,11 @@ public class AddAnuncioActivity extends AppCompatActivity {
 
             Toast.makeText(AddAnuncioActivity.this, "Livro adicionado com sucesso!", Toast.LENGTH_SHORT).show();
 
-
         }
 
-
     }
 
-    }
+}
 
 
 

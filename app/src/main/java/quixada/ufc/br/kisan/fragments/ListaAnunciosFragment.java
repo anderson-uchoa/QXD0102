@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import quixada.ufc.br.kisan.R;
+import quixada.ufc.br.kisan.Util.CaminhosWebService;
 import quixada.ufc.br.kisan.adapter.ExpandableListAnunciosAdapter;
 import quixada.ufc.br.kisan.adapter.OnCustomClickListener;
 import quixada.ufc.br.kisan.application.CustomApplication;
@@ -36,8 +37,8 @@ import quixada.ufc.br.kisan.services.WebResult;
 public class ListaAnunciosFragment extends Fragment  implements OnCustomClickListener {
     private static final String TAG = "ListaAnunciosFragment";
 
-    CustomApplication application = new CustomApplication();
-    String url = "http://"+application.getIp()+"/KisanSERVER/livros/insereLivroWishList/";
+
+    String url = "http://"+ CaminhosWebService.IP+"/KisanSERVER/livros/insereLivroWishList/";
 
     ExpandableListAnunciosAdapter listAdapter;
     ExpandableListView expListView;
@@ -57,13 +58,10 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
 
         View view = inflater.inflate(R.layout.fragment_lista_anuncios, container, false);
 
-
-
-
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar2);
         expListView = (ExpandableListView) view.findViewById(R.id.expandableListView_wishlist);
 
-        application = (CustomApplication) getActivity().getApplicationContext();
+        CustomApplication  application = (CustomApplication) getActivity().getApplication();
         usuario = application.getUsuario();
         id = usuario.getId();
 
@@ -167,7 +165,20 @@ public class ListaAnunciosFragment extends Fragment  implements OnCustomClickLis
         @Override
         protected void onPostExecute(Livro s) {
             super.onPostExecute(s);
-            EventBus.getDefault().post(s);
+            if (s == null){
+
+                Toast.makeText(getActivity(), "Livro já esta na sua WishList!", Toast.LENGTH_SHORT).show();
+
+            }else{
+                Toast.makeText(getActivity(), "Livro adicionado na WishList!", Toast.LENGTH_SHORT).show();
+
+                EventBus.getDefault().post(s);
+            }
+
+
+
+
+
 
         }
 
